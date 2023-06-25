@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    
+
+    <style>
+        body{
+            width:80%;
+            margin: auto;
+        }
+
+        h2 {
+            width : 200px;
+            margin: 50px;
+            position: relative;
+            left:720px;
+        }
+
+        /* table */
+        td input{
+            width:250px;
+        }
+
+        table {
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        /* buttons */
+        .buttons {
+            width:20%;
+            position: relative;
+            left:980px;
+        }
+    </style>
+</head>
+<body>
+    <!-- table -->
+    <h2>Q&A 작성</h2>
+
+    <div id="wrap">
+        <table cellpadding="5" cellspacing="5">
+                <tr>
+                    <th>제목 *</th>
+                    <td>
+                        <select id="selectTitle">
+                            <option value="상품 문의">상품 문의</option>
+                            <option value="배송 문의">배송 문의</option>
+                            <option value="반품 문의">반품 문의</option>
+                            <option value="교환 문의">교환 문의</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>작성자 *</th>
+                    <td><input type="text" name="name" id="name" disabled></td>
+                </tr>
+                <tr>
+                    <th>비밀번호 *</th>
+                    <td><input type="password" name="pass" id="pw"></td>
+                </tr>
+                <tr>
+                    <th>상품이름 </th>
+                    <td><input type="text" name="product" id="product"></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td><textarea cols="100" rows="30" name="content" id="content"></textarea></td>
+                </tr>
+                
+            </table>
+
+            <div class="buttons">
+                <button class="btn" value="등록" onclick="create()">등록</button>
+                <button class="btn" type="reset" value="다시작성하기" onclick="reset()">다시 작성하기</button>
+                <input class="btn" type="button" value="취소" onclick="javascript:history.back()">
+            </div>
+            
+        
+    </div>
+
+        <!-- JAVASCRIPT -->
+        <script src="main.js"></script>
+        <script src="util.js"></script>
+        <script src="session.js"></script>
+    
+    <script>
+        /* cookie 값 가져와서 name 값 보여주기 */
+        let cookie = getCookie("login");
+        console.log(cookie)
+        let result = "";
+        
+        for(let i=0; i<members.length; i ++){
+            if(cookie == members[i].id){
+                result = members[i].name;
+                break;
+            }
+        }
+        document.getElementById("name").value = result;
+    </script>
+
+    
+</body>
+</html>

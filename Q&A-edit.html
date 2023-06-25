@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <!-- JAVASCRIPT -->
+    <script src="main.js"></script>
+    <script src="util.js"></script>
+    <script src="session.js"></script>
+
+    <style>
+        body{
+            width:80%;
+            margin: auto;
+        }
+
+        h2 {
+            width : 200px;
+            margin: 50px;
+            position: relative;
+            left:720px;
+        }
+
+        /* table */
+        td input{
+            width:250px;
+        }
+
+        table {
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        #tbody {
+            margin :auto;
+            margin-bottom : 20px;
+        }
+
+        /* buttons */
+        .buttons {
+            width:20%;
+            position: relative;
+            left:980px;
+        }
+    </style>
+</head>
+<body>
+    <!-- table -->
+    <h2>Q&A 작성</h2>
+
+    <div id="wrap">
+        <table cellpadding="5" cellspacing="5">
+            <tbody id="tbody">
+                <tr>
+                    <th>제목 *</th>
+                    <td>
+                        <select id="selectTitle">
+                            <option value="상품 문의">상품 문의</option>
+                            <option value="배송 문의">배송 문의</option>
+                            <option value="반품 문의">반품 문의</option>
+                            <option value="교환 문의">교환 문의</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>작성자 *</th>
+                    <td><input type="text" name="name" id="name" disabled></td>
+                </tr>
+                
+            </tbody>
+            </table>
+
+            <div class="buttons">
+                <button class="btn" value="등록" onclick="createEdit()">등록</button>
+                <button class="btn" type="reset" value="다시작성하기" onclick="reset()">다시 작성하기</button>
+                <input class="btn" type="button" value="취소" onclick="javascript:history.back()">
+            </div>
+            
+        
+    </div>
+
+
+    
+    <script>
+
+        /* cookie 값 가져와서 name 값 보여주기 */
+        let cookie = getCookie("login");
+        let result = "";
+        
+        for(let i=0; i<members.length; i ++){
+            if(cookie == members[i].id){
+                result = members[i].name;
+                break;
+            }
+        }
+        document.getElementById("name").value = result;
+
+
+        /* sesstion값 가져와서 값 보여주기 */
+        let tbody = document.getElementById("tbody");
+
+        // Get parameta , key 값 받아오기
+        let keyValue = decodeURI(window.location.search);
+        keyValue = keyValue.replace("?키=","");
+        console.log(`keyvalue ${keyValue}`)
+
+        /* sessionStorage 값 가져와서 보여주기 */
+
+        let value = JSON.parse(sessionStorage.getItem("board"));
+        for(let i=0; i<value.length; i++) {
+            if(keyValue == i){
+                // 테이블 만들어서 보여주기
+                let tr2 = document.createElement("tr");
+                    let th2 = document.createElement("th");
+                    let td2 = document.createElement("td");
+                    let input2 = document.createElement("input");
+
+                    let tr3 = document.createElement("tr");
+                    let th3 = document.createElement("th");
+                    let td3 = document.createElement("td");
+                    let input3 = document.createElement("input");
+
+                    let tr4 = document.createElement("tr");
+                    let th4 = document.createElement("th");
+                    let td4 = document.createElement("td");
+                    let textarea = document.createElement("textarea");
+
+                    // 각각 값 넣어주기
+                    th2.innerHTML += "비밀번호 *";
+                    th3.innerHTML += "상품이름";
+                    th4.innerHTML += "내용";
+
+                    input2.id = "pw";
+                    input3.id = "product";
+                    textarea.id = "content";
+                    
+
+                    input2.value += value[i].pw;
+                    input3.value += value[i].product;
+                    textarea.value += value[i].content;
+                    textarea.rows = "30";
+                    textarea.cols = "100"
+
+                    input2.id = "pw";
+                    input2.type = "password";
+                    input3.id = "product"
+                    textarea.id = "content";
+                
+                    // 각각 자식 추가해주기
+                    td2.appendChild(input2);
+                    td3.appendChild(input3);
+                    td4.appendChild(textarea);
+
+                    // 각각 자식 추가해주기
+                    tr2.appendChild(th2);
+                    tr3.appendChild(th3);
+                    tr4.appendChild(th4);
+
+                    // 각각 자식 추가해주기
+                    tr2.appendChild(td2);
+                    tr3.appendChild(td3);
+                    tr4.appendChild(td4);
+
+                    // 각각 자식 추가해주기
+                    tbody.appendChild(tr2);
+                    tbody.appendChild(tr3);
+                    tbody.appendChild(tr4);
+                }
+            }
+        
+    </script>
+
+    
+</body>
+</html>

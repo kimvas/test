@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Document</title>
+
+    <!-- JAVASCRIPT -->
+    <script src="main.js"></script>
+    <script src="util.js"></script>
+    <script src="session.js"></script>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+
+        }        
+        
+        a{
+            text-decoration: none;
+            cursor: pointer;
+            color:white;
+        }
+
+        #pro_hover:hover {
+            text-decoration: underline;
+        }
+
+       /* header */
+        header{
+            width:100%;
+        }
+
+        header .emo {
+            display: flex;
+            justify-content: flex-end;
+            margin-right:10%;
+            margin-top: 2%;
+        }
+
+        header .emo div {
+            padding: 0.5%;
+        }
+
+        header .emo div i {
+            font-size: 23px;
+            cursor: pointer;
+            color: rgba(32, 31, 31, 0.8);
+        }
+
+        header h1{
+            width:100%;
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 80px;
+            margin-left: 50px;
+            position:relative;
+            left: 150px;
+            top:30px;
+        } 
+
+        /* section */
+        .board {
+            width : 80%;
+            margin : 0 auto;
+        }
+
+        .board .title {
+            margin : 0;
+            padding: 24px;
+            font-size : 30px;
+            border-top : 3px solid black;
+        }
+
+        .board .group {
+            display : flex;
+            padding : 0 24px;
+            border-top : 1px solid rgb(170, 170, 170);
+            border-bottom : 2px solid rgb(170, 170, 170);
+        }
+
+        .board .group p {
+            margin : 15px;
+            margin-right: 50px;
+            font-size: 17px;
+            
+        }
+
+        .board .group p span {
+            margin-left : 15px;
+            color:rgb(170, 170, 170)
+        }
+
+        .board #content{
+            width:100%;
+            height: 400px;
+            padding: 24px;
+            box-sizing: border-box;
+            font-size: 16px;
+            border-bottom: 2px solid black;
+        }
+
+        /* buttons */
+        .buttons {
+            width:300px;
+            height: 100px;
+            position: absolute;
+            right : 130px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .buttons button {
+            margin-right: 15px;
+            border: none;
+            background: none;
+            font-size : 15px;
+            width : 50px;
+            height : 30px;
+            border : 1px solid black;
+            background: black;
+            cursor: pointer;
+        }
+
+        .buttons .delete{
+            color:white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- header -->
+    <header>
+        <div class="emo">
+            <div><i class="fa-solid fa-cart-shopping"></i></div>
+            <div><i class="fa-solid fa-user"></i></div>
+        </div>
+
+        <h1>Q&A</h1>
+    </header>
+    
+    <section class="board">
+        <!-- <p class="title">제목</p> -->
+
+        <div class="group">
+            <p id="num">번호
+                <!--<span id="num">3</span>-->
+            </p>
+            <p id="name">글쓴이
+                <!--<span id="name">김혜림</span>-->
+            </p>
+            <p id="date">작성일
+                <!--<span id="date">작성일</span>-->
+            </p>
+        </div>
+
+        <!-- <div id="content">sds</div> -->
+    </section>
+
+    <section class="buttons">
+        <button class="list"><a href="Q&A-list.html">목록</a></button>
+        <button class="edit"></button>
+        <button class="delete" onclick="deleteSession()">삭제</button>
+    </section>
+
+    <script>
+        
+        let board = document.querySelector(".board");
+        let group = document.querySelector(".group");
+        let cookie = getCookie("login");
+        let edit = document.querySelector(".edit");
+
+        // Get parameta , key 값 받아오기 
+           // let urlStr = decodeURI(window.location.search);
+            let urlStr = decodeURI(location.href);
+
+            let url = new URL(urlStr);
+            let urlParams = url.searchParams;
+            console.log(urlParams)
+            let keyValue = urlParams.get('키');
+            console.log(keyValue)
+
+            // sessionStorage 값 가져오기
+            let value = JSON.parse(sessionStorage.getItem("board"));
+            
+            for(let i=0; i<value.length; i++) {
+                if(keyValue == i){ // parameta로 받은 값과 i 값이 같으면 테이블 만들어서 보여주기
+                    let count = value[i].count;
+                    
+                        // 테이블 만들어서 보여주기
+                        let num = document.getElementById("num");
+                        let name = document.getElementById("name");
+                        let date = document.getElementById("date");
+
+                        let title = document.createComment("p");
+                        let span1 = document.createElement("span");
+                        let span2 = document.createElement("span");
+                        let span3 = document.createElement("span");
+                        let content = document.createElement("textarea");
+
+                        // content에 아이디 부여하고 수정못하게
+                        content.id = "content";
+                        content.disabled = "disabled"
+
+                        // 각각 값 넣어주기
+                        title.innerHTML = value[i].title;
+                        span1.innerText = value[i].count;
+                        span2.innerText = value[i].name;
+                        span3.innerText = value[i].date;
+                        content.innerText = value[i].content;
+                    
+                        // 각각 자식 추가해주기
+                        num.appendChild(span1);
+                        name.appendChild(span2);
+                        date.appendChild(span3);
+
+                        // 각각 자식 추가
+                        board.appendChild(title);
+                        board.appendChild(group);
+                        board.appendChild(content);
+                        board.disabled;
+
+                        // 각각 자식 추가
+                        group.appendChild(num);
+                        group.appendChild(name);
+                        group.appendChild(date);
+
+                         // 수정 버튼 
+                            let a = document.createElement("a");
+                            a.innerHTML = "수정";
+                            a.href = `Q&A-edit.html?키=${i}`;
+
+                            edit.appendChild(a);
+                }
+            }
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Main</title>
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            box-sizing: border-box;
+            border : none;
+        }
+
+        body {
+            width : 100%;
+            height : 100%;
+            margin : 0;
+            font-size : 16px;
+            color : #000;
+            font-weight : 400;
+        }
+
+        div {
+            display: block;
+        }
+
+        a{
+            text-decoration: none;
+            margin:0;
+            padding:0;
+            font-family: inherit;
+            font-size:inherit;
+            color:inherit;
+        }
+
+        a:hover {
+            color:inherit;
+        }
+
+        ul{
+            list-style: none;
+            margin-bottom:0;
+        }
+
+        li{
+            display:list-item;
+            text-align : -webkit-match-parent;
+        }
+
+        h1 {
+            font-size : inherit;
+            color : inherit;
+            margin-bottom: 0;
+            display: block;
+            margin-block-start : 0.67em;
+            margin-block-end : 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight:bold;
+        }
+
+        #root{
+            height: 100%;
+        }
+
+        .main {
+            position :relative;
+            height: 100%;
+        }
+
+        .whole {
+            position: relative;
+            width : 100%;
+            min-height : 100%;
+            min-width : 1320px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* header */
+        .fg {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height: 90px;
+            min-width:1320px;
+            background-color: rgb(255,255,255);
+            z-index: 10;
+        }
+
+        .hd {
+            position: sticky;
+            top: 0px;
+            left: 0px;
+            padding-top:0px;
+            background-color: rgb(249,249,249);
+            transition : border 0.4s ease 0s, background-color 0.4s ease 0s, top 0.2s ease 0s;
+            border-bottom : 1px solid transparent;
+        }
+
+        .ggo {
+            position:sticky;
+            top:0px;
+            left:0px;
+            padding-top:0px;
+            background-color : rgba(255,255,255,0.98);
+            transition:border 0.4s ease 0s, background-color 0.4 ease 0s, top 0.2s ease 0s;
+            border-bottom : 1px solid rgb(221,221,221);
+        }       
+
+        .top {
+            width:100%;
+            display: flex;
+            height :90px;
+            -webkit-box-align: center;
+            align-items: center;
+            padding : 0 40px;
+        }
+
+        .logo-img {
+            width : 172px;
+            height: 40px;
+            position: relative;
+            text-indent : -1000em;
+            display: block;
+            background : url(./img/다운로드.png) 0% 0%/100% no-repeat;
+            overflow: hidden;
+        }
+
+        .r-nav {
+            margin-right : -2px;
+            margin-left: auto;
+        }
+
+        .r-nav h2 {
+            position:absolute;
+            width : 0px;
+            height: 0px;
+            overflow : hidden;
+            z-index : -1;
+        }
+
+        .r-nav ul {
+            display : flex;
+        }
+
+        .r-nav li {
+            margin-left: 16px;
+        }
+
+        .r-nav .search-btn{
+            background : url(./img/돋보기.png) 0% 0% /28px no-repeat;
+        }
+
+        .gSfxPA {
+            width:32px;
+            height:32px;
+            position: relative;
+            text-indent: -1000em;
+            display: block;
+        }
+
+        .r-nav .cart-btn {
+            background : url(./img/장바구니.png) 0% 0% /28px no-repeat;
+        }
+
+        .bkMQTV {
+            background :url(./img/mypage.png) 0% 0% /28px no-repeat;
+        }
+
+        .fXFgHO {
+            width : 32px;
+            height: 32px;
+            position: relative;
+            text-indent: -1000em;
+            display: block;
+        }
+
+        .r-nav .fXszZH {
+            min-width : 69px;
+            height: 33px;
+            margin : 0 2px;
+            padding : 0 16px;
+            font-size : 14px;
+            font-weight : 700;
+            text-align : center;
+            border : 2px solid rgb(68,68,68);
+            border-radius: 17px;
+            display:inline-flex;
+            -webkit-box-align : center;
+            align-items: center;
+            transition: border 0.4s ease 0s, background-color 0.4s ease 0s, top 0.2s ease 0s;
+        }
+
+        .r-nav .menu-btn {
+            background : url(./img/hamburger.png) 0% 0%/28px no-repeat;
+        }
+
+        .rm3 {
+            width : 32px;
+            height: 32px;
+            position:relative;
+            text-indent: -1000em;
+            display: block;
+        }
+        button {
+            margin-bottom :0;
+            border : none;
+            outline : none;
+            cursor : pointer;
+        }
+
+        .fg nav {
+            position:absolute;
+            top:0;
+            left:272px;
+            width:calc(100% - 622px);
+            z-index: 1;
+            height: 90px;
+            display: flex;
+            -webkit-box-align :center;
+            align-items :center;
+        }
+
+        .fg nav h2 {
+            position : absolute;
+            width:0px;
+            height:0px;
+            overflow: hidden;
+            z-index : -1;
+        }
+
+        .fg nav ul {
+            font-weight : 500;
+            display : flex;
+        }
+
+        .fg nav ul li {
+            white-space : nowrap;
+            font-size : 18px;
+            margin-right: 26px;
+        }
+
+        /* *******************검색 */
+
+        .gzRefZ { /***전체페이지 검색버튼 toggle 전*/
+            position:fixed;
+            overflow-y : scroll;
+            max-height : 100%;
+            top : 0px;
+            animation-direction: alternate;
+            width: 100%;
+            background-color: rgb(255,255,255);
+            z-index : 100;
+            transform : translateY(-100%);
+            visibility : hidden;
+            transition : transform 0.3s ease 0s, visibility 0.3s ease 0s;
+        }
+
+        .ksrLg {  /***전체페이지 검색버튼 toggle 후*/
+            position:fixed;
+            overflow-y: scroll;
+            max-height:100%;
+            top: 0px;
+            animation-direction: alternate;
+            width :100%;
+            background-color : rgb(255,255,255);
+            z-index : 100;
+            transform: translateY(0px);
+            visibility : visible;
+            transition: transform 0.3s ease 0s, visibility 0.3s ease 0s;
+        }
+
+        .jVXkbk { /* 내용 블럭 */
+            position:relative;
+            min-width : 600px;
+            max-width : 1440px;
+            margin : 0px auto;
+            padding : 102px 0px 80px;
+        }
+
+        .kJwJYF { /* input 공간 */
+            position:relative;
+            display: flex;
+            -webkit-box-align: center;
+            align-items : center;
+            width: 600px;
+            margin : 0px auto;
+        }
+
+        .kJwJYF::after { /* 검색창 밑에 선 */
+            content :"";
+            position:absolute;
+            bottom:0px;
+            left:0px;
+            width:100%;
+            height : 2px;
+            background-color:rgb(0,0,0);
+            display:block;
+        }
+
+        .jGnAEF {
+            width:100%;
+            height: 65px;
+            margin-right : 22px;
+            font-size : 24px;
+            line-height: 29px;
+        }
+
+        input {
+            color: #000;
+            vertical-align: middle;
+            border-radius: 0;
+            outline : none;
+            text-rendering: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent:0px;
+            text-shadow : none;
+            display: inline-block;
+            text-align : start;
+            appearance : auto;
+            cursor : text;
+            background-color:field;
+        }
+
+        .gnoNld {
+            display : block;
+            text-indent : -1000em;
+            width : 28px;
+            height: 28px;
+            overflow : hidden;
+            flex : 0 0 auto;
+            background : url(./img/돋보기.png) 0% 0% /28px no-repeat;
+        }
+
+        /********* 최근 검색창 **********/
+        .kkSmvU {
+            width : 758px;
+            margin : 0px auto;
+        }
+
+        .bOxTgW {
+            position:relative;
+            margin-top : 80px;
+        }
+        
+        .eDSbxJ {
+            margin-bottom: 16px;
+            font-size : 16px;
+            line-height : 19px;
+            font-weight : 700;
+        }
+
+        .gZprqq {
+            width : 100%;
+        }
+
+        .eyjLlZ {
+            padding : 36px 0px;
+        }
+        
+        .hmUDBq {
+            width: 100%;
+            font-size : 13px;
+            color: rgb(0,0,0);
+            line-height: 16px;
+            text-align : center;
+        }
+
+        .eTRneP {  /* 검색 버튼 toggle 전 */
+            position: absolute;
+            width : 28px;
+            height : 28px;
+            display: block;
+            text-indent: -1000em;
+            overflow : hidden;
+            z-index : 1;
+            top : 30px;
+            right : 30px;
+            cursor :pointer;
+        }
+
+        .eTRneP::before {
+            position:absolute;
+            top : 13px;
+            left : 3px;
+            width : 23px;
+            height: 2px;
+            background-color : rgb(68,68,68);
+            display: block;
+            content : "";
+            opacity : 0;
+            transform : rotate(0deg);
+            transition : transform 0.4s ease 0.3s, opacity 0.4s ease;
+        }
+
+        .eTRneP::after {
+            position:absolute;
+            top : 13px;
+            left : 3px;
+            width : 23px;
+            height: 2px;
+            background-color : rgb(68,68,68);
+            display: block;
+            content : "";
+            opacity : 0;
+            transform : rotate(0deg);
+            transition : transform 0.4s ease 0.3s, opacity 0.4s ease;
+        }
+
+        .wXtFi {  /* 닫기 toggle 후 */
+            position:absolute;
+            width: 28px;
+            height: 28px;
+            display : block;
+            text-indent : -1000em;
+            overflow : hidden;
+            z-index : 1;
+            top: 30px;
+            right: 30px;
+            cursor : pointer;
+        }
+
+        .wXtFi::before {
+            position: absolute;
+            top : 13px;
+            left: 3px;
+            width: 23px;
+            height: 2px;
+            background-color: rgb(68,68,68);
+            display : block;
+            content : "";
+            opacity : 1;
+            transform : rotate(45deg);
+            transition : transform 0.4s ease 0.3s, opacity 0.4s ease;
+        }
+
+        .wXtFi::after {
+            position: absolute;
+            top: 13px;
+            left : 3px;
+            width: 23px;
+            height: 2px;
+            background-color : rgb(68,68,68);
+            display :block;
+            content : "";
+            opacity:1;
+            transform :rotate(-45deg);
+            transition : opacity 0.4s ease 0.3s, transform 0.4s ease;
+        }
+
+        .fAtBFN { /* toggle 후 */
+            position : fixed;
+            top: 0px;
+            left: 0px;
+            width : 100%;
+            height : 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index : 11;
+            opacity :  1;
+            visibility : visible;
+            transition : opacity 0.3 ease 0s, visibility 0.3s ease;
+            
+        }
+
+        .iFeRkU { /* toggle 전 */
+            position :fixed;
+            top : 0px;
+            left: 0px;
+            width : 100%;
+            height : 100%;
+            background-color : rgba(0,0,0,0.6);
+            z-index : 11;
+            opacity : 0;
+            visibility : hidden;
+            transition : opacity 0.3s ease 0s, visibility 0.3s ease 0s;
+            border: 2px solid red;
+        }
+
+        /******* side menu ****/
+
+        .kakfyC { /* side memu 누르기 전*/
+                position: fixed;
+                top: 0px;
+                left : 0px;
+                width: 0px;
+                height: 0px;
+                overflow: hidden;
+                transition : z-index 0.4s ease 0.4s;
+                z-index : -100;
+                opacity : 1;
+            }
+
+
+            .fgozys {  /* side menu 누른 후 */
+                position : fixed;
+                top : 0px;
+                left: 0px;
+                overflow: hidden;
+                transition : z-index 0s ease 0s;
+                width : 100%;
+                height: 100%;
+                z-index : 100;
+                opacity : 1;
+            }
+
+            .gdtYNR {
+                position : fixed;
+                top : 0px;
+                width : 380px;
+                height: 100%;
+                padding-top : 60px;
+                background-color : rgb(255,255,255);
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                z-index : 1;
+                transition : right 0.4s ease 0s;
+            }
+
+            .liahhj {
+                padding : 0px 40px 60px;
+            }
+
+            .liahhj > h2 {
+                width : 260px;
+                font-family: BM-HANNA-11yrs-old, sans-serif;
+                font-size : 32px;
+                line-height: 42px;
+                font-weight: 400;
+                letter-spacing: -1px;
+                color:rgb(68,68,68);
+            }
+
+            .liahhj > h2 > p{
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: 36px;
+            }
+
+            .khzwyP {
+                margin-right: 6px;
+                font-family: inherit;
+                color:rgb(42,193,188);
+            }
+
+            .dzlgmP {
+                margin-top : 16px;
+                display :flex;
+            }
+
+            .dzlgmP li:first-child {
+                margin-left : 0px;
+            }
+
+            .dzlgmP li {
+                margin-left : 10px;
+            }
+
+            .bGFtaP {
+                min-width : 57px;
+                font-size : 13px;
+                color : rgb(68,68,68);
+                text-align: center;
+                display :block;
+            }
+
+            .bGFtaP::before {
+                width : 40px;
+                height : 40px;
+                margin : 0px auto;
+                display :block;
+                content : "";
+            }
+
+            .iZZwlB::before {
+                background : url(./img/mypage.png) 0% 0% / cover no-repeat;
+            }
+
+            .cHedBP::before {
+                background : url(./img/coupon.png) 0% 0% /cover no-repeat;
+            }
+
+            .ibeUIG::before{
+                background:url(./img/orderbox.png) 0% 0% / cover no-repeat;
+            }
+            /****side menu nav****/
+            nav {
+                display : block;
+            }
+
+            .uZaHK {
+                height : 100%;
+                padding: 0px 40px 40px;
+                overflow-y : auto;
+            }
+
+            .uZaHK h2:first-child {
+                margin-top : 0px;
+            }
+            
+            .uZaHK h2{
+                margin-top:40px;
+                font-size : 16px;
+                color : rgb(153,153,153);
+                font-weight : 400;
+                line-height: 19px;
+            }
+
+            .uZaHK ul li:first-child {
+                margin-top: 14px;
+            }
+
+            .uZaHK ul li {
+                margin-top:16px;
+                font-size : 24px;
+                color : rgb(68,68,68);
+                line-height: 29px;
+                font-weight: 700;
+            }
+
+            .uZaHK::-webkit-scrollbar {
+                width : 6px;
+                height: 6px;
+            }
+
+            .uZaHK::-webkit-scrollbar-thumb {
+                border-radius: 3px;
+                background:rgb(221,221,221);
+                margin-top : 20px;
+            }
+
+            .uZaHK::-webkit-scrollbar-track {
+                margin : 0px;
+                padding-right : 4px;
+                border-radius : 12px;
+                background-color : transparent;
+            }
+
+        /******* footer ************/
+            .chcvRc {
+                margin-top : auto;
+                padding : 27px 40px;
+                background-color: rgb(255,255,255);
+                display :flex;
+                -webkit-box-pack :  center;
+                justify-content: center;
+            }
+
+            .hwyIfC {
+                display :flex;
+                -webkit-box-pack : center;
+                justify-content: center;
+                -webkit-box-align : center;
+                align-items: center;
+            }
+
+            .hwyIfC > h2 {
+                width : 34px;
+                height: 34px;
+                background : url(./img/상담.png) center center / 100% no-repeat;
+                display : block;
+                text-indent : -1000em;
+                overflow: hidden;
+            }
+
+            .hwyIfC ul {
+                font-size : 16px;
+                font-weight : 700;
+                line-height: 19px;
+                display : flex;
+            }
+
+            .hwyIfC ul li {
+                display : flex;
+                -webkit-box-align: center;
+                align-items: center;
+            }
+
+            .hwyIfC ul li::before {
+                width : 1px;
+                height : 16px;
+                margin: 0px 10px;
+                background-color: rgb(221,221,221);
+                display: block;
+                content : "";
+            }
+
+            .hwyIfC ul li a {
+                padding : 0px 20px;
+                display : flex;
+                -webkit-box-pack : center;
+                justify-content: center;
+                cursor : pointer;
+            }
+
+            .dXOkqN { /* side menu 누르기 전 닫기 */
+                position:absolute;
+                top:30px;
+                right: 40px;
+                width: 28px;
+                display: block;
+                text-indent : -1000em;
+                z-index: 1;
+                overflow: hidden;
+            }
+
+            .dXOkqN::before,
+            .dXOkqN::after {
+                opacity : 0;
+                transition-delay : 0.2s;
+                position:absolute;
+                top : 13px;
+                left:3px;
+                width:23px;
+                height:2px;
+                background-color: rgb(68,68,68);
+                display: block;
+                content : "";
+                transition : transform 0.4s ease 0s, opacity 0.4s ease;
+            }
+
+            .bNzgXx { /* side menu 누르기 후 닫기*/
+                position:absolute;
+                top : 30px;
+                right : 40px;
+                width : 28px;
+                height : 28px;
+                display : block;
+                text-indent : -1000em;
+                overflow : hidden;
+                z-index : 1;
+                cursor: pointer;
+            }
+            
+            .bNzgXx::before {
+                opacity : 1;
+                transition-delay : 0.2s;
+                transform : rotate(45deg);
+            }
+
+            .bNzgXx::after {
+                opacity : 1;
+                transition-delay : 0.2s;
+                transform : rotate(-45deg);
+            }
+
+            .bNzgXx::before,
+            .bNzgXx::after {
+                opacity : 1;
+                transition-delay : 0.2s;
+                position:absolute;
+                top : 13px;
+                left:3px;
+                width:23px;
+                height:2px;
+                background-color: rgb(68,68,68);
+                display: block;
+                content : "";
+                transition : transform 0.4s ease 0s, opacity 0.4s ease;
+            }
+
+            .fTYzQQ{  /*화면 어둡게 하는부분 전*/
+                position: fixed;
+                top : 0px;
+                left: 0px;
+                width : 100%;
+                height : 100%;
+                background-color: rgba(0,0,0,0.5);
+                content : "";
+                transition : opacity 0.4s ease 0.2s;
+                opacity : 0;
+            }
+
+            .kxDJqV {  /*화면 어둡게 하는부분 후*/
+                position :fixed;
+                top : 0px;
+                left:0px;
+                width : 100%;
+                height : 100%;
+                background-color : rgba(0,0,0,0.5);
+                content : "";
+                transition : opacity 0.4s ease 0s;
+                opacity : 1;
+            }
+
+
+        /***************** slider */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            position:relative;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper{
+            position:relative;
+            width:100%;
+            height:100%;
+            display:flex;
+            z-index:1;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /*****************main banner*****/
+        .main-visual + .moonbanggu-container {
+            padding-top : 120px;
+        }
+
+        .moonbanggu-container {
+            width : 1200px;
+            height : 100%;
+            margin : 0 auto;
+            padding : 80px 0 200px 0;
+            display: flex;
+            flex-direction: column;
+            flex : 1;
+        }
+
+        .main-theme:first-child {
+            margin-top :0;
+        }
+
+        .main-theme {
+            width : 100%;
+            margin-top: 120px;
+        }
+
+        .main-banner {
+            width: 1200px;
+        }
+
+        .main-banner img {
+            width : 100%;
+        }
+
+        .main-theme .main-content {
+            position : relative;
+            width : 100%;
+            padding : 0 92px;
+            overflow: hidden;
+        }
+
+        /************* main slider *****************/
+        .main-theme .main-swiper {
+            width : 100%;
+            overflow: hidden;
+        }
+
+        .main-theme .b-list {
+            flex-wrap: nowrap;
+            overflow: visible;
+        }
+
+        .b-list {
+            display : flex;
+            flex-wrap : wrap;
+        }
+
+        .swiper-pointer-events {
+            touch-action : pan-y;
+        }
+
+        .swiper {
+            position:relative;
+            width : 100%;
+            height : 100%;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper {
+            position: relative;
+            width : 100%;
+            height : 100%;
+            display : flex;
+            transition-property: transform;
+            z-index : 1;
+        }
+
+        .main-theme .b-list .list-box {
+            width : 312px;
+            margin : 60px 0 0 0;
+            flex : 0 0 auto;
+        }
+
+        .b-list .list-box {
+            width : 282px;
+            margin : 60px 0 0 24px;
+            font-size : 16px;
+            text-align: center;
+            transition : 0.3s ease color;
+            display : flex;
+            flex-direction: column;
+        }
+
+        .b-list .list-box:nth-child(4n+1) {
+            margin-left : 0;
+        }
+
+        .swiper-slide {
+            position : relative;
+            width : 100%;
+            height : 100%;
+            display :flex;
+            transition-property: transform;
+            -webkit-box-pack : center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+        }
+
+        .main-theme .b-list .list-box .thumbs {
+            width : 312px;
+            height : 312px;
+        }
+
+        .b-list .list-box .thumbs {
+            position: relative;
+            width : 100%;
+            height : 282px;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+        }
+
+        .b-list .list-box .thumbs img{
+            max-width: 100%;
+            max-height : 100%;
+        }
+
+        .b-list .list-box .thumb-hover {
+            position:absolute;
+            top:0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            display : flex;
+            justify-content: center;
+            align-items: center;
+            opacity : 0;
+            z-index: 1;
+            transition : 0.2s ease opacity;
+        }
+
+        .b-list .list-box .thumb-hover img {
+            width : 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .iduHXF {
+            position:absolute;
+            top : 0px;
+            left : 0px;
+            width : 100%;
+            height : 100%;
+            display :flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align : center;
+            align-items: center;
+            opacity : 0;
+            transition:opacity 0.2s ease 0s;
+        }
+
+        .b-list .list-box .info {
+            position :relative;
+            margin-top : 20px;
+            padding-top: 22px;
+        }
+
+        .b-list .list-box .badge {
+            position : absolute;
+            top : 0;
+            left : 0;
+        }
+
+        .badge {
+            position:relative;
+            width : 100%;
+            height : 15px;
+            font-size : 12px;
+            font-weight : 700;
+            line-height: 14px;
+            display:flex;
+            flex-wrap : wrap;
+            justify-content: center;
+        }
+
+        .b-list .list-box .name {
+            line-height: 24px;
+            font-weight : 500;
+            word-break : keep-all;
+        }
+
+        .b-list .list-box .price {
+            margin-top: 10px;
+            font-weight : 500;
+            justify-content: center;
+            display:inline-flex;
+            flex-wrap: wrap;
+        }
+
+        .badge > i:first-child {
+            margin-left : 0;
+        }
+
+        .badge .icon-best {
+            color : #6236FF;
+        }
+
+        .badge > i {
+            position:relative;
+            margin-left: 5px;
+            font-style : normal;
+            vertical-align: middle;
+        }
+
+        .badge .icon-best::after {
+            background-color:#6236FF;
+        }
+
+        .badge > i::after {
+            position:absolute;
+            bottom :0;
+            left: 0;
+            width : 100%;
+            height : 1px;
+            background-color: inherit;
+            display : block;
+            content: "";
+        }
+
+        .badge .icon-green {
+            color : #0C952A;
+        }
+
+        .badge .icon-green::after {
+            background-color : #0C952A;
+        }
+
+        /*****buttons*******/
+        .main-theme .main-content .bt-nav.prev {
+            left : 0;
+            background:url(./img/arr_swiper_prev_l.png) no-repeat;
+            background-size : 100% auto;
+        }
+
+        .main-theme .main-content .bt-nav {
+            position:absolute;
+            top:50%;
+            width : 32px;
+            height:58px;
+            text-indent: -1000em;
+            transform : translateY(-50%);
+            overflow:hidden;
+            display:block;
+            z-index:1;
+        }
+
+        .main-theme .main-content .bt-nav.next {
+            right : 0;
+            background : url(./img/arr_swiper_next_l.png) no-repeat;
+            background-size : 100% auto;
+        }
+
+        /**********요즘 잘나가요*********/
+        .main-title {
+            margin-top:120px;
+            padding-top:120px;
+            font-size: 30px;
+            font-weight: 800;
+            line-height:42px;
+            text-align : center;
+            border-top:1px solid #ddd;
+        }
+
+        .b-list {
+            display : flex;
+            flex-wrap:wrap;
+        }
+
+        
+        .b-list .list-box:nth-child(4n+1) {
+            margin-left:0;
+        }
+
+        .b-list .list-box {
+            width : 282px;
+            margin : 60px 0 0 24px;
+            font-size : 16px;
+            text-align : center;
+            transition: .3s ease color;
+            display :flex;
+            flex-direction: column;
+        }
+
+        .b-list .list-box .thumbs {
+            position: relative;
+            width : 100%;
+            height : 282px;
+            display : flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .b-list .list-box .thumbs img{
+            max-width : 100%;
+            max-height: 100%;
+        }
+
+        .b-list .list-box .thumb-hover {
+            position : absolute;
+            top : 0;
+            left : 0;
+            width : 100%;
+            height: 100%;
+            display : flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            z-index : 1;
+            transition : .2s ease opacity;
+        }
+
+        .b-list .list-box .thumb-hover img{
+            width : 100%;
+            height : 100%;
+            object-fit: contain;
+        }
+
+        .hTuscY {
+            position: absolute;
+            top : 0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            display : flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            align-items: center;
+            opacity : 0;
+            transition : opacity 0.2s ease 0s;
+        }
+
+        .b-list .list-box .info {
+            position :relative;
+            margin-top : 20px;
+            padding-top : 22px;
+        }
+
+        .b-list .list-box .badge {
+            position: absolute;
+            top : 0;
+            left : 0;
+        }
+
+        .b-list .list-box .name {
+            line-height: 24px;
+            font-weight: 500;
+            word-break : keep-all;
+        }
+
+        .b-list .list-box .price {
+            margin-top : 10px;
+            font-weight: 500;
+            justify-content: center;
+            display: inline-flex;
+            flex-wrap: wrap;
+        }
+
+        /****************main section2***************/
+        
+        .main-theme .b-list {
+            flex-wrap: nowrap;
+            overflow : visible;
+        }
+
+
+        .main-theme .b-list .list-box {
+            margin : 60px 0 0 0;
+            flex : 0 0 auto;
+        }
+
+    /************footer**************/
+        .moonbanggu-footer {
+            margin-top: auto;
+            padding: 70px 0 100px 0;
+            background-color : #fafafa;
+        }
+
+        .moonbanggu-footer .moonbanggu-inner {
+            position :relative;
+            width:1200px;
+            margin : 0 auto;
+            display : flex;
+            align-items: flex-start;
+        }
+
+        .KDmtN {
+            margin-right : 180px;
+        }
+
+        .KDmtN span {
+            width: 172px;
+            height : 40px;
+            position : relative;
+            text-indent: -1000em;
+            display:block;
+            background : url(./img/다운로드.png) 0% 0% /100% no-repeat;
+            overflow: hidden;
+        }
+
+        .cNRQml {
+            padding-top : 4px;
+        }
+
+        .bYqeUY {
+            font-size: 16px;
+            color : rgb(68,68,68);
+            line-height: 24px;
+            display : flex;
+        }
+
+        .bYqeUY ul {
+            display : flex;
+        }
+
+        .bYqeUY ul li {
+            margin-right : 24px;
+        }
+
+        .djcfpw {
+            display : block;
+        }
+
+        .moonbanggu-footer .sns-insta {
+            font-size : 16px;
+            font-weight : 700;
+            line-height : 24px;
+            white-space: nowrap;
+            display : flex;
+            align-items: center;
+        }
+
+        .moonbanggu-footer .sns-insta::before {
+            width: 24px;
+            height: 24px;
+            margin-right : 6px;
+            background : url(./img/icon_footer_insta.png) no-repeat;
+            background-size : 24px auto;
+            display: inline-block;
+            content:"";
+        }
+
+        .ezaeWY {
+            font-size : 16px;
+            font-weight : 700;
+            line-height : 24px;
+            display : flex;
+            -webkit-box-align: center;
+            align-items: center;
+        }
+
+        .hIzKoN {
+            margin-top : 14px;
+            color : rgb(153,153,153);
+            display : flex;
+            flex-wrap : wrap;
+        }
+
+        .hIzKoN p {
+            margin-top : 12px;
+            font-size : 13px;
+            line-height: 16px;
+            display : inline-block;
+        }
+
+        .hIzKoN p::after {
+            width : 1px;
+            height : 10px;
+            margin : 0 12px;
+            background-color: rgb(204,204,204);
+            display:inline-block;
+            content : "";
+        }
+
+        .hIzKoN p > button {
+            font-size : inherit;
+            color : inherit;
+            text-decoration: underline;
+            vertical-align: top;
+            background : none;
+            outline : none;
+        }
+
+        .eFIwwb {
+            transition : all 200ms ease-in 0s;
+            visibility: hidden;
+            opacity : 0;
+        }
+
+        .toast-box {
+            position : fixed;
+            bottom:30px;
+            left : 50%;
+            min-width : 280px;
+            max-width : 800px;
+            min-height : 19px;
+            padding: 14px 34px;
+            font-size : 16px;
+            color : #fff;
+            line-height: 19px;
+            text-align: center;
+            word-break : keep-all;
+            background : rgba(0,0,0,0.78);
+            border-radius: 100px;
+            transform : translateX(-50%);
+            display : flex;
+            flex-direction: column;
+            align-items: center;
+            z-index : 100;
+        }
+
+    </style>
+</head>
+
+<body style>
+    
+        <div id="root">
+            <div class="root main">
+                <div class="whole">
+                    <header class="hd fg" style="transform: translateY(-1px);">
+                        <div class="top">
+                            <h1 class="logo">
+                                <a href="main.html" class="logo-img">배민문방구</a>
+                            </h1>
+                            <div class="r-nav">
+                                <h2>공통 메뉴</h2>
+
+                                <ul>
+                                    <li>
+                                        <button class="search-btn gSfxPA kyVWGp" onclick="search_bar()">검색</button>
+                                    </li>
+
+                                    <li>
+                                        <a class="cart-btn fXFgHO gQpdXV" href="cart.html">
+                                            "장바구니"
+                                            "0"
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="fXFgHO bkMQTV" href="mypage.html">마이페이지</a>
+                                    </li>
+
+                                    <li>
+                                        <button class="fXszZH" onclick="logout()">로그아웃</button>
+                                    </li>
+
+                                    <li>
+                                        <button class="menu-btn gSfxPA hwFXGO">메뉴</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <nav class="nav">
+                            <h2>카테고리 메뉴</h2>
+                            <ul>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">전체</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">문구</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">리빙</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">책/매거진F</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">배민그린</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">배달이친구들</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">콜라보레이션</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">명예의 전당</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="Q&A-list.html">Q&A</a></li>
+                            </ul>
+                        </nav>
+                    </header>
+
+                    <!-- 검색 -->
+                    <div class="sc-fIkgrG gzRefZ"> <!-- 전체 -->
+                        <div class="sc-bQdwJz jVXkbk"> <!-- 내용 블럭 -->
+                            <div class="sc-evcquM kJwJYF"> <!-- 인풋 공간 -->
+                                <input type="text" placeholder="검색어를 입력하세요." class="sc-CVGMF jGnAEF" value>
+                                <button class="sc-fvWJJf gnoNld"></button>
+                            </div>
+
+                            <div class="sc-iaVDus kkSmvU">
+                                <section class="bOxTgW">
+                                    <h3 class="eDSbxJ">최근 검색어</h3>
+                                    <div class="gZprqq">
+                                        <div class="eyjLlZ">
+                                            <div class="hmUDBq">최근 검색어가 없어요.</div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <a class="eTRneP" id="close">닫기</a> <!-- toggle 만들어주기 -->
+                        </div>
+                    </div>
+
+                    <div class="iFeRkU"></div> <!-- 검색 눌렀을 때 바탕 어둡게  -->
+                        <div class="kakfyC"> <!-- side 메뉴 버튼  -->
+                            <div class="gdtYNR" style = "right : -380px">
+                                <header class="liahhj">
+                                    <h2>
+                                        <span class="khzwyP"></span>님
+                                        <p>나이스 투 미츄!</p>
+                                    </h2>
+
+                                    <ul class="dzlgmP">
+                                        <li><a href="mypage.html" class="bGFtaP iZZwlB">마이페이지</a></li>
+                                        <li><a href="#" class="bGFtaP cHedBP">쿠폰함</a></li>
+                                        <li><a href="#" class="bGFtaP ibeUIG">주문배송</a></li>
+                                    </ul>
+                                </header>
+                                <footer class="chcvRc">
+                                    <div class="hwyIfC">
+                                        <h2>고객센터</h2>
+                                        <ul>
+                                            <li><a href="">1:1 문의</a></li>
+                                            <li><a href="" target="_blank" rel="noreferrer">이메일 문의</a></li>
+                                        </ul>
+                                    </div>
+                                </footer>
+                                <a class="dXOkqN">닫기</a> <!-- side menu 닫기-->
+                            </div>
+                            <div class="fTYzQQ"></div> <!-- 배경 어둡게 하는 부분-->
+                        </div>
+
+                            <!-- Swiper -->
+                            <div class="swiper mySwiper main-visual">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="/img/033d5b71-45cf-4851-a58d-b1e31d7fc2cc.png">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="/img/18096a21-5cf2-403a-98a4-a337aff72574.jpg">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="/img/74e5a658-d5fa-4574-a0e2-7ff86b9f7d1f.png">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="/img/a0ba2e9e-45ed-4f21-8e0f-09f1f6a3c515.jpg">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="/img/f44fe945-a7a0-41a0-9af2-06f4387255ae.jpg">
+                                    </div>
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
+                                </div>
+
+                                <div class="moonbanggu-container">
+                                    <div class="main-theme">
+                                        <div class="main-banner">
+                                            <a href="" style="cursor:pointer">
+                                                <img src="./img/1991ee97-1f50-4b57-919c-7e2c23974c3a.jpg" alt="">
+                                            </a>
+                                        </div>
+
+                                        <div class="main-content">
+                                            <div class="main-swiper">
+                                                <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events sc-fXazdy UjHkE b-list">
+                                                    <div class="swiper-wrapper" style = "transform : translate3d(0px,0px,0px)">
+                                                        
+                                                        <div class="swiper-slide list-box swiper-slide-active" style="width:312px; margin-right:40px;">
+                                                            <a style="cursor: pointer;">
+                                                            <p class="thumbs">
+                                                                <img src="./img/5d0e9aca-cf45-4cc0-b6d1-99c53dca5456.png" alt="돈봉투 골드에디션.효도">
+                                                                <span class="sc-dvXYtj iduHXF thumb-hover">
+                                                                    <img src="./img/62535a0f-0ea1-400e-8473-815dc53ea493.png" alt="상품 이미지">
+                                                                </span>
+                                                            </p>
+                                                            <div class="info">
+                                                                <span class="badge"></span>
+                                                                <p class="name">돈봉투 골드에디션. 효도</p>
+                                                                <p class="price">3,500원</p>
+                                                            </div>
+                                                            </a>
+                                                        </div>
+
+                                                            <div class="swiper-slide list-box swiper-slide-next" style="width:312px; margin-right:40px;">
+                                                                <a style="cursor: pointer;">
+                                                                    <p class="thumbs">
+                                                                        <img src="./img/c61760b7-c38b-4ce8-b4bd-87f7bfcfe2fb.png" alt="돈봉투 골드에디션. 용돈">
+                                                                        <span class="sc-dvXYtj iduHXF thumb-hover">
+                                                                            <img src="./img/bc0c63c9-8dfa-4876-a191-ee1ef7e2b706.png" alt="상품 이미지">
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="info">
+                                                                        <span class="badge">
+                                                                            <i class="icon-best">
+                                                                                "BEST"
+                                                                            </i>
+                                                                        </span>
+                                                                        <p class="name">돈봉투 골드에디션. 용돈</p>
+                                                                        <p class="price">3,500원</p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="swiper-slide list-box" style="width:312px; margin-right: 40px;">
+                                                                <a style="cursor: pointer;">
+                                                                <p class="thumbs">
+                                                                    <img src="./img/6b2d42df-775a-45d6-b3b2-592852044bbd.png" alt="돈봉투.사랑">
+                                                                    <span class="sc-dvXYtj iduHXF thumb-hover">
+                                                                        <img src="./img/53cdbc5b-bc47-4b42-8a0a-5d77b9ed70c7.png" alt="상품이미지">
+                                                                    </span>
+                                                                </p>
+                                                                <div class="info">
+                                                                    <span class="badge">
+                                                                        <i class="icon-best">
+                                                                            "BEST"
+                                                                        </i>
+                                                                    </span>
+                                                                    <p class="name">돈봉투. 사랑</p>
+                                                                    <p class="price">2,500원</p>
+                                                                </div>
+                                                                </a>
+                                                            </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" class="bt-nav prev"></button>
+                                            <button type="button" class="bt-nav next"></button>
+                                        </div>
+                                    </div>
+                                        
+                                    <h3 class="main-title">요즘 잘 나가요</h3>
+                                    <div class="b-list">
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/843d16a2-2644-46bd-87a7-0c90cf204030.png" alt="작은 쇼핑백. 복">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/c0fd78fc-27fd-42ee-aef3-15655e8b29b8.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-best">
+                                                            "BEST"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">작은 쇼핑백. 축복</p>
+                                                    <p class="price">1,800원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/758d8be2-79c4-4a8e-9921-788877d13f86.png" alt="컴퓨터용싸인펜">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/b4694ac2-5e0c-4844-8457-94d42ac1510a.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-best">
+                                                            "BEST"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">컴퓨터용싸인펜. 오늘이 전설이 될 것이다</p>
+                                                    <p class="price">1,000원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/d0d5b101-654d-4b63-ab3d-2e101032d4e9.gif" alt="종이로 만든 박스테이프. 두근두근">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/ffb3e52c-79f6-4c4f-a806-08fc72009d2d.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-green">
+                                                            "GREEN"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">종이로 만든 박스테이프. 두근두근</p>
+                                                    <p class="price">4,500원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/d80521bd-b6c8-4785-82bf-cd6943277e93.png" alt="화학표백을 하지않은 재생지로 만든 메모잇">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/843d0126-19aa-4305-995f-3e16814839d8.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-green">
+                                                            "GREEN"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">화학표백을 하지 않은 재생지로 만든 메모잇</p>
+                                                    <p class="price">2,300원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/42fde91d-0a09-47bb-95ba-86d14c8b26e4.png" alt="재생지에 콩기름으로 인쇄한 일기장">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/00bfb006-688b-4911-a5de-5eca9a55b156.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-best">
+                                                            "BEST"
+                                                        </i>
+                                                        <i class="icon-green">
+                                                            "GREEN"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">재생지에 콩기름으로 인쇄한 일기장</p>
+                                                    <p class="price">3,500원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/3820b84f-c3f2-4481-b795-ce033a735128.png" alt="뱃지. 치킨">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/f9fadd32-b2fe-4b30-955e-1751c0dcdbb6.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-best">
+                                                            "BEST"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">뱃지. 치킨</p>
+                                                    <p class="price">5,500원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/250d194d-ec05-4003-ac29-9d9e73b745cf.png" alt="때수건. 다 때가있다">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/d029a158-5398-419d-a72e-2fbef6fc5030.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-best">
+                                                            "BEST"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">때수건. 다 때가 있다</p>
+                                                    <p class="price">2,000원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="list-box">
+                                            <a style="cursor:pointer">
+                                                <p class="thumbs">
+                                                    <img src="./img/cdd2b0c1-5617-4a95-bebf-bb5cfc440a91.png" alt="잘나가요 세트">
+                                                    <span class="thumb-hover hTuscY">
+                                                        <img src="./img/212310b6-6560-4895-8171-afce97bc526d.png" alt="상품이미지">
+                                                    </span>
+                                                </p>
+
+                                                <div class="info">
+                                                    <span class="badge">
+                                                        <i class="icon-best">
+                                                            "BEST"
+                                                        </i>
+                                                    </span>
+                                                    <p class="name">잘나가요 세트</p>
+                                                    <p class="price">15,000원</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="main-theme">
+                                            <div class="main-banner">
+                                                <a style="cursor: pointer;">
+                                                    <img src="./img/b1d0910e-d595-4462-80cb-f31b40c5db39.jpg" alt="">
+                                                </a>
+                                            </div>
+
+                                            <div class="main-content">
+                                                <div class="main-swiper">
+                                                    <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events UjHkE b-list">
+                                                        <div class="swiper-wrapper" style="transform:translate3d(0px,0px,0px)">
+                                                            <div class="list-box">
+                                                                <a style="cursor: pointer;">
+                                                                    <p class="thumbs">
+                                                                        <img src="./img/8f06ff7e-69ed-4f36-b0e0-4ef59fb96a59.jpg" alt="요즘 사는 맛2">
+                                                                        <span class="iduHXF thumb-hover">
+                                                                            <img src="./img/37518655-bd81-41de-a8df-99715dbcded7.jpg" alt="상품 이미지">
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="info">
+                                                                        <span class="badge"></span>
+                                                                        <p class="name">요즘 사는 맛2</p>
+                                                                        <p class="price">17,000원</p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="list-box">
+                                                                <a style="cursor: pointer;">
+                                                                    <p class="thumbs">
+                                                                        <img src="./img/2753efe7-089e-4e19-bec6-7124415b51b1.jpg" alt="요즘 사는 맛">
+                                                                        <span class="iduHXF thumb-hover">
+                                                                            <img src="./img/3d4646c2-7849-4b1c-a8a8-145980efda99.jpg" alt="상품 이미지">
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="info">
+                                                                        <span class="badge"></span>
+                                                                        <p class="name">요즘 사는 맛</p>
+                                                                        <p class="price">16,000원</p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="list-box">
+                                                                <a style="cursor: pointer;">
+                                                                    <p class="thumbs">
+                                                                        <img src="./img/391ac1ff-f9ef-4140-8a4b-a5171d974289.jpg" alt="이게 무슨 일이야">
+                                                                        <span class="iduHXF thumb-hover">
+                                                                            <img src="./img/d9f5b4e6-7763-4101-bdf4-b9d0f33b3ad5.jpg" alt="상품 이미지">
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="info">
+                                                                        <span class="badge"></span>
+                                                                        <p class="name">이게 무슨 일이야</p>
+                                                                        <p class="price">15,000원</p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="list-box">
+                                                                <a style="cursor: pointer;">
+                                                                    <p class="thumbs">
+                                                                        <img src="./img/a5d8dca4-32f6-4d16-b8bc-131b57522fb5.jpg" alt="배민다움">
+                                                                        <span class="iduHXF thumb-hover">
+                                                                            <img src="./img/1ed54f75-0da9-496f-9979-0d66cf0ffcb3.jpg" alt="상품 이미지">
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="info">
+                                                                        <span class="badge"></span>
+                                                                        <p class="name">배민다움</p>
+                                                                        <p class="price">15,000원</p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="list-box">
+                                                                <a style="cursor: pointer;">
+                                                                    <p class="thumbs">
+                                                                        <img src="./img/b5644cc4-02ec-4864-9c04-f091da170d54.jpg" alt="매거진F No.25 Tea">
+                                                                        <span class="iduHXF thumb-hover">
+                                                                            <img src="./img/2f04f856-66e5-497e-9fb3-bd692c91a1be.jpg" alt="상품 이미지">
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="info">
+                                                                        <span class="badge"></span>
+                                                                        <p class="name">매거진F No.25 Tea</p>
+                                                                        <p class="price">18,000원</p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="list-box">
+                                                                <a style="cursor: pointer;">
+                                                                    <p class="thumbs">
+                                                                        <img src="./img/075dd1f2-491b-488d-b583-6e900df36ee0.png" alt="매거진F 아트북">
+                                                                        <span class="iduHXF thumb-hover">
+                                                                            <img src="./img/a7bf38e2-b593-44cf-a4ee-4a92ee970e81.png" alt="상품 이미지">
+                                                                        </span>
+                                                                    </p>
+                                                                    <div class="info">
+                                                                        <span class="badge"></span>
+                                                                        <p class="name">매거진F 아트북</p>
+                                                                        <p class="price">47,000원</p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <button type="button" class="bt-nav prev"></button>
+                                                    <button type="button" class="bt-nav next"></button>
+                                            </div>
+                                            <h3 class="main-title">새로 나왔어요</h3>
+                                        </div>
+
+                                        <div class="b-list">
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/8e708925-4d48-46fd-bab1-d03f6429b684.png" alt="매거진F No.26 Bread">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/073afb53-d611-47f9-8bc0-e2975207a7b6.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge">
+                                                            <i class="icon-sale">
+                                                                <b>"10%"</b>
+                                                                "SALE"
+                                                            </i>
+                                                        </span>
+                                                        <p class="name">매거진F No.26 Bread</p>
+                                                        <p class="price">
+                                                            <del>18,000</del>
+                                                            47,000원
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/47cfc046-1ac5-4444-8486-5195a2eb525f.png" alt="맥주짠세트. 비워주세요">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/739b58a3-a356-42aa-b5b3-3a03810f0187.png" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge">
+                                                            <i class="icon-best">
+                                                                "BEST"
+                                                            </i>
+                                                        </span>
+                                                        <p class="name">맥주짠세트. 비어주세요</p>
+                                                        <p class="price">
+                                                                10,900원
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/8f06ff7e-69ed-4f36-b0e0-4ef59fb96a59.jpg" alt="요즘 사는 맛2">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/37518655-bd81-41de-a8df-99715dbcded7.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">요즘 사는 맛2</p>
+                                                        <p class="price">17,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/b5644cc4-02ec-4864-9c04-f091da170d54.jpg" alt="매거진F No.25 Tea">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/2f04f856-66e5-497e-9fb3-bd692c91a1be.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">매거진F No.25 Tea</p>
+                                                        <p class="price">18,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/a5d8dca4-32f6-4d16-b8bc-131b57522fb5.jpg" alt="배민다움">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/1ed54f75-0da9-496f-9979-0d66cf0ffcb3.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">배민다움</p>
+                                                        <p class="price">15,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/2753efe7-089e-4e19-bec6-7124415b51b1.jpg" alt="요즘 사는 맛">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/3d4646c2-7849-4b1c-a8a8-145980efda99.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">요즘 사는 맛</p>
+                                                        <p class="price">16,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/5bfef84e-0454-4231-ad2d-62794de4ce48.jpg" alt="매거진F No.24 Yogurt">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/ea8da348-e131-4826-960d-2f702d937555.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">매거진F No.24 Yogurt</p>
+                                                        <p class="price">18,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/af07cebc-f166-460e-9873-399e36aad341.jpg" alt="매거진F No.23 Mushroom">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/2d7b2c37-43d6-4879-b505-2e35cc805557.png" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">매거진F No.23 Mushroom</p>
+                                                        <p class="price">18,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/594ee5c3-3144-4845-b6e3-686064fb4e3c.jpg" alt="매거진F No.22 Olive">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/45c39875-7d33-4002-92a4-34a8c273f0c5.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">매거진F No.22 Olive</p>
+                                                        <p class="price">15,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/3e8ecdfa-4b9a-445d-8ac4-b5e68461336c.jpg" alt="글림체 한글자 붙임딱지">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/be8d622c-45fa-431f-9b1b-000f19c4e948.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">글림체 한글자 붙임딱지</p>
+                                                        <p class="price">8,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/41a43897-d641-464a-90ec-aee1191ca98e.jpg" alt="글림체 자음모음 붙임딱지">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/a7a129dd-6519-45c6-8bc4-4914892be264.jpg" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">글림체 자음모음 붙임딱지</p>
+                                                        <p class="price">3,500원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/6d3512de-6108-48c6-8544-0de8bc116353.gif" alt="배달이친구들 스탠드그립 6종">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/2a8ae7ac-1fac-465e-9573-2081e10cd2c9.png" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">배달이친구들 스탠드그립 6종</p>
+                                                        <p class="price">8,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/526c13d0-5e85-438e-ae0b-ad91ac026eb9.gif" alt="배달이친구들 팝업카드 2종">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/5b07a1cf-6453-4f7f-a0f8-7e86eed26e48.png" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge">
+                                                            <i class="icon-best">"BEST"</i>
+                                                        </span>
+                                                        <p class="name">배달이친구들 팝업카드 2종</p>
+                                                        <p class="price">4,000원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/21cb8a0e-3aa4-464e-9354-104030c54294.png" alt="배달이친구들 지금뭐해 피규어. 감자의 수확하는 계절">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/89722ba3-ab51-4cab-9d73-35224a9f1270.png" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">배달이친구들 지금뭐해 피규어. 감자의 수확하는 계절종</p>
+                                                        <p class="price">3,500원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/87fb3a65-c7f6-4f1b-aab6-8edfe6e12245.png" alt="배달이친구들 지금뭐해 피규어. 왕의 언박싱 타임">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/44aca8be-5b9d-41d4-940d-e8bc36d88305.png" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">배달이친구들 지금뭐해 피규어. 왕의 언박싱 타임</p>
+                                                        <p class="price">3,500원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="list-box">
+                                                <a style="cursor: pointer;">
+                                                    <p class="thumbs">
+                                                        <img src="./img/f7fee3a0-9571-42d0-815b-7df2feca703e.png" alt="배달이친구들 지금뭐해 피규어. 봉다리의 달리는 아침">
+                                                        <span class="iduHXF thumb-hover">
+                                                            <img src="./img/a067d9b7-ff45-4d15-a46a-73d633be6157.png" alt="상품 이미지">
+                                                        </span>
+                                                    </p>
+                                                    <div class="info">
+                                                        <span class="badge"></span>
+                                                        <p class="name">배달이친구들 지금뭐해 피규어. 봉다리의 달리는 아침</p>
+                                                        <p class="price">3,500원</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div> <!-- monggu-container end -->
+
+                                <div class="moonbanggu-footer">
+                                    <div class="moonbanggu-inner">
+                                        <h2 class="KDmtN">
+                                            <span>배민문방구</span>
+                                        </h2>
+
+                                        <div class="cNRQml">
+                                            <nav class="bYqeUY">
+                                                <ul>
+                                                    <li><a class="djcfpw" href="#">About</a></li>
+                                                    <li><a class="djcfpw" href="#">공지사항</a></li>
+                                                    <li><a class="djcfpw" href="#">이용약관</a></li>
+                                                    <li><a class="djcfpw" href="#">개인정보처리방침</a></li>
+                                                    <li><a class="djcfpw" href="#">대량구매/제휴안내</a></li>
+                                                </ul>
+
+                                                <p class="link-sns">
+                                                    <a href="#" class="ezaeWY sns-insta" target="_black">@baemin_store</a>
+                                                </p>
+                                            </nav>
+
+                                            <div class="hIzKoN">
+                                                <p>상호 : (주)우아한형제들</p>
+                                                <p>대표 : 이국환</p>
+                                                <p>사업자등록번호 : 120-87-65763</p>
+                                                <p>통신판매업신고번호 : 2021-서울송파-0515</p>
+                                                <p>
+                                                    <button>사업자정보확인</button>
+                                                </p>
+                                                <p>대표번호 : 1670-9902</p>
+                                                <p>이메일 : marketing_store@woowahan.com</p>
+                                                <p>주소 : 서울특별시 송파구 위례성대로 2 장은빌딩</p>
+                                                <p>호스팅제공 : (주)우아한형제들</p>
+                                                <p class="copyright">© Woowa Brothers Corp. All rights reserved</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="eFIwwb">
+                                <div class="toast-box" style="z-index:9999;"></div>
+                            </div>
+            </div>
+        </div>
+    
+
+
+    
+    
+
+    
+    <!-- Initialize Swiper -->
+    <script>
+    const swiper = new Swiper(".mySwiper", {
+        slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
+        spaceBetween : 6, // 슬라이드 사이 여백
+        cssMode: true,
+        navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+        el: ".swiper-pagination",
+        },
+        mousewheel: true,
+        keyboard: true,
+        autoplay : { // 자동 슬라이드 설정, 비 활성화 시 false
+            delay : 2000, // 시간 설정
+        }
+    });
+
+</script>
+<script>
+    if(JSON.parse(localStorage.getItem("kakaoID"))){
+        let kakao = JSON.parse(localStorage.getItem("kakaoID"))
+        let nickname = document.querySelector(".khzwyP");
+        console.log(nickname)
+        for(let i=0; i <kakao.length ; i ++) {
+        console.log(kakao[i].name)
+        nickname.innerText = `${kakao[i].name}`;
+        }
+
+    }
+</script>
+    
+
+        <!-- JAVASCRIPT -->
+        <script src="main.js"></script>
+        <script src="util.js"></script>
+        <script src="session.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenujs/metismenujs.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/feather-icons/feather.min.js"></script>
+        
+
+</body>
+</html>

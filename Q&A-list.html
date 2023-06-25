@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- JAVASCRIPT -->
+    <script src="main.js"></script>
+    <script src="util.js"></script>
+    <script src="session.js"></script>
+    
+        <title>Document</title>
+
+    <style>
+        a{
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #pro_hover:hover {
+            text-decoration: underline;
+        }
+
+       /* header */
+        header{
+            width:100%;
+        }
+
+        header .emo {
+            display: flex;
+            justify-content: flex-end;
+            margin-right:10%;
+            margin-top: 1%;
+        }
+
+        header .emo div {
+            padding: 0.5%;
+        }
+
+        header .emo div i {
+            font-size: 23px;
+            cursor: pointer;
+            color: rgba(32, 31, 31, 0.8);
+        }
+
+        header h1{
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 50px;
+        } 
+
+        /* search */
+        .search {
+            display: flex;
+            justify-content: flex-end;
+            margin-right:250px;
+        }
+
+        .search #search-btn{
+            width:50px;
+            height:30px;
+            background:none;
+            color:black;
+            position:absolute;
+            margin-left:5px;
+            border :none;
+            font-size:1em;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* table */
+
+        .table {
+            margin-top : 2%;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            left: 10%;
+        }
+
+        
+
+        table{
+            width:100%;
+            table-layout: fixed;
+        }
+
+        
+        .tbl-header{
+            background-color: rgba(32, 31, 31, 0.3);
+            margin :auto;
+        }
+
+        .tbl-header thead th{
+            font-weight:600;
+        }
+        
+        .tbl-content{
+            
+            overflow-x:auto;
+            margin-top: 0px;
+            border: 1px solid rgba(6, 6, 6, 0.3);
+        }
+
+        th{
+            padding: 20px 15px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        td{
+            position:relative;
+            padding: 20px;
+            text-align:center;
+            vertical-align:middle;
+            font-weight: 300;
+            font-size: 12px;
+            border-bottom: solid 1px rgba(255,255,255,0.1);
+        }
+
+        td img{
+            position: absolute;
+            left:0px;
+            top:10px;
+        }
+
+        td span {
+            text-align: center;
+        }
+
+        /* 버튼 */
+        #submit-btn{
+            position: relative;
+            left:1660px;
+            top:40px;
+            cursor: pointer;
+            border: none;
+            background:none;
+            font-size: 0.9rem;
+            text-decoration-line:underline;
+        }
+    
+        #submit-btn a {
+            color:royalblue;
+        }
+        
+
+        /* demo styles */
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+        
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+
+    </style>
+</head>
+
+    <!-- header -->
+    <header>
+        
+        <div class="emo">
+            <div><a href="main2.html"><i class="fa-solid fa-house"></i></a></div>
+            <div><i class="fa-solid fa-cart-shopping"></i></div>
+            <div><i class="fa-solid fa-user"></i></div>
+        </div>
+
+        <h1>Q&A</h1>
+    </header>
+
+    
+<!-- search -->
+<section class="search">
+    <div class="input">
+        <!-- <select name="period" id="per-select">
+            <option value="all">전체</option>
+            <option value="week">일주일</option>
+            <option value="month">한달</option>
+        </select>
+        -->
+        <select name="what" id="what-select">
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="name">글쓴이</option>
+            <option value="id">아이디</option>
+        </select>
+
+        <input type="search" id="search">
+        <button id="search-btn" onclick="search()">search</button>
+    </div>
+</section>
+
+    <!-- table -->
+    <section class="table">
+        
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                    <th>NO.</th>
+                    <th>PRODUCT</th>
+                    <th>TITLE</th>
+                    <th>POSTED BY</th>
+                    <th>DATE</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0" id="table">
+                <tbody id="tbody">
+                <tr>
+                <td>공지</td>
+                <td></td>
+                <td>해외 배송 안내 (Overseas delivery announcement)</td>
+                <td>배민운영자</td>
+                <td>2023.06.03</td>
+                </tr>
+                <tr>
+                    <td>공지</td>
+                    <td></td>
+                    <td>휴대폰 결제 및 취소시 필독 부탁드립니다!</td>
+                    <td>배민운영자</td>
+                    <td>2023.06.03</td>
+                </tr>
+
+                <tr>
+                    <td>공지</td>
+                    <td></td>
+                    <td>카카오톡 1:1 상담 안내</td>
+                    <td>배민운영자</td>
+                    <td>2023.06.03</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <img src="./img/391ac1ff-f9ef-4140-8a4b-a5171d974289.jpg" width="50" height="50">
+                        <span>이게 무슨일이야</span>
+                    </td>
+                    <td>상품문의</td>
+                    <td id="id">김별</td>
+                    <td>2023.04.15</td>
+                </tr>
+                <tr id="mong">
+                    <td>2</td>
+                    <td>
+                        <img src="./img/6d3512de-6108-48c6-8544-0de8bc116353.gif" width="50" height="50">
+                        <span>배달이친구들 스탠드그립6종</span>
+                    </td>
+                    <td>상품문의</td>
+                    <td>김몽</td>
+                    <td>2023.05.30</td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+            
+    </section>
+
+
+    <button id="submit-btn"><a href="Q&A-write.html">글쓰기</a></button>
+    
+    
+    
+
+    <script>
+    /* sessionStorage 값 가져와서 보여주기 */
+        let tbody = document.getElementById("tbody");
+    
+        if(JSON.parse(sessionStorage.getItem("board")) != undefined){
+            let value = JSON.parse(sessionStorage.getItem("board"));
+
+            // 최신순으로 출력하기 위해
+            for(let i = value.length -1; i >= 0; i--){
+                        
+                // 테이블 요소 생성
+                let tr = document.createElement("tr"); // 줄 생성
+                let td1 = document.createElement("td"); // 넘버 칸
+                let td2 = document.createElement("td"); // 프로덕트 이름 칸
+                let a = document.createElement("a"); // 페이지 이동 
+                let td3 = document.createElement("td"); // 타이틀 칸
+                let td4 = document.createElement("td"); // 작성자 칸
+                let td5 = document.createElement("td"); // 날짜 칸
+
+                // 생성된 요소에 값 넣고 테이블에 추가
+                td1.innerHTML = value[i].count;
+                
+                a.id = "pro_hover"
+                // key값 parameta로 보내기
+                let encode = `Q&A-details.html?키=${i}`;
+                a.href = encodeURI(encode);
+                
+                a.innerHTML = value[i].product;
+                a.style.color = "black";
+                a.style.cursor = "pointer";
+
+                td3.innerHTML = value[i].title;
+                td4.innerHTML = value[i].name;
+                td5.innerHTML = value[i].date;
+
+                td2.appendChild(a);
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+                tr.appendChild(td5);
+                tbody.appendChild(tr);
+        
+    }
+}
+            
+        
+
+ /********************************** 검색 */
+function search(){
+    console.log("clicked")
+    let searchString = document.getElementById("search");
+    let select= document.getElementById("what-select");
+    let tbody = document.getElementById("tbody");
+
+    let value = JSON.parse(sessionStorage.getItem("board"));
+
+
+//     Object.keys(sessionStorage).forEach((key,index) =>{
+//         if(key.includes("board")){
+//             let value = JSON.parse(sessionStorage.getItem(key));
+//             debugger;
+//             if(select.value == value.title){
+
+//                 // 테이블 요소 생성
+//                 let tr1 = document.createElement("tr"); // 줄 생성
+//                 let td1 = document.createElement("td"); // 넘버 칸
+//                 let td2 = document.createElement("td"); // 프로덕트 이름 칸
+//                 let a = document.createElement("a"); // 페이지 이동 
+//                 let td3 = document.createElement("td"); // 타이틀 칸
+//                 let td4 = document.createElement("td"); // 작성자 칸
+//                 let td5 = document.createElement("td"); // 날짜 칸
+
+//                 // 생성된 요소에 값 넣고 테이블에 추가
+//                 td1.innerHTML = value.count;
+                            
+//                 a.id = "pro_hover"
+//                 // key값 parameta로 보내기
+//                 let encode = `Q&A-details.html?키=${index}`;
+//                 a.href = encodeURI(encode);
+//                 console.log(key)
+//                 a.innerHTML = value.product;
+//                 a.style.color = "black";
+//                 a.style.cursor = "pointer";
+
+//                 td3.innerHTML = value.title;
+//                 td4.innerHTML = value.name;
+//                 td5.innerHTML = value.date;
+
+//                 td2.appendChild(a);
+
+//                 tr1.appendChild(td1);
+//                 tr1.appendChild(td2);
+//                 tr1.appendChild(td3);
+//                 tr1.appendChild(td4);
+//                 tr1.appendChild(td5);
+//                 tbody.appendChild(tr1);
+
+//         }
+//     }
+// })
+    
+}
+    </script>
+    
+    
+</body>
+</html>

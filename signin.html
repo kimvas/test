@@ -1,0 +1,1458 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>로그인 | 배민문방구</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Pichforest" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- Bootstrap Css -->
+        <!-- <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" /> -->
+        <!-- fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Icons Css
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        App Css
+        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" /> -->
+
+        <!-- kakao -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- naver -->
+        <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        <style>
+        *{
+            margin:0;
+            padding:0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            box-sizing: border-box;
+            border : none;
+        }
+
+        body {
+            width : 100%;
+            height : 100%;
+            margin : 0;
+            font-size : 16px;
+            color : #000;
+            font-weight : 400;
+            background : none;
+        }
+
+        div {
+            display: block;
+        }
+
+        a{
+            text-decoration: none;
+            margin:0;
+            padding:0;
+            font-family: inherit;
+            font-size:inherit;
+            color:inherit;
+        }
+
+        a:hover {
+            color:inherit;
+        }
+
+        ul{
+            list-style: none;
+            margin-bottom:0;
+        }
+
+        li{
+            display:list-item;
+            text-align : -webkit-match-parent;
+        }
+
+        h1 {
+            color : inherit;
+            margin-bottom: 0;
+            display: block;
+            margin-block-start : 0.67em;
+            margin-block-end : 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight:bold;
+        }
+
+        #root{
+            height: 100%;
+        }
+
+        .main {
+            position :relative;
+            height: 100%;
+        }
+
+        .whole {
+            position: relative;
+            width : 100%;
+            min-height : 100%;
+            min-width : 1320px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            margin:0;
+            padding:0;
+        }
+        
+        /* header */
+        .fg {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height: 90px;
+            min-width:1320px;
+            background-color: rgb(255,255,255);
+            z-index: 10;
+        }
+
+        .hd {
+            position: sticky;
+            top: 0px;
+            left: 0px;
+            padding-top:0px;
+            background-color: rgb(249,249,249);
+            transition : border 0.4s ease 0s, background-color 0.4s ease 0s, top 0.2s ease 0s;
+            border-bottom : 1px solid transparent;
+        }
+
+        .ggo {
+            position:sticky;
+            top:0px;
+            left:0px;
+            padding-top:0px;
+            background-color : rgba(255,255,255,0.98);
+            transition:border 0.4s ease 0s, background-color 0.4 ease 0s, top 0.2s ease 0s;
+            border-bottom : 1px solid rgb(221,221,221);
+        }       
+
+        .top {
+            width:100%;
+            display: flex;
+            height :90px;
+            -webkit-box-align: center;
+            align-items: center;
+            padding : 0 40px;
+        }
+
+        .logo-img {
+            width : 172px;
+            height: 40px;
+            position: relative;
+            text-indent : -1000em;
+            display: block;
+            background : url(./img/다운로드.png) 0% 0%/100% no-repeat;
+            overflow: hidden;
+        }
+
+        .r-nav {
+            margin-right : -2px;
+            margin-left: auto;
+        }
+
+        .r-nav h2 {
+            position:absolute;
+            width : 0px;
+            height: 0px;
+            overflow : hidden;
+            z-index : -1;
+        }
+
+        .r-nav ul {
+            display : flex;
+        }
+
+        .r-nav li {
+            margin-left: 16px;
+        }
+
+        .r-nav .search-btn{
+            background : url(./img/돋보기.png) 0% 0% /28px no-repeat;
+        }
+
+        .rm1 {
+            width:32px;
+            height:32px;
+            position: relative;
+            text-indent: -1000em;
+            display: block;
+        }
+
+        .r-nav .cart-btn {
+            background : url(./img/장바구니.png) 0% 0% /28px no-repeat;
+        }
+
+        .rm2 {
+            width : 32px;
+            height: 32px;
+            position: relative;
+            text-indent: -1000em;
+            display: block;
+        }
+
+        .r-nav .signin {
+            min-width : 69px;
+            height: 33px;
+            margin : 0 2px;
+            padding : 0 16px;
+            font-size : 14px;
+            font-weight : 700;
+            text-align : center;
+            border : 2px solid rgb(68,68,68);
+            border-radius: 17px;
+            display:inline-flex;
+            -webkit-box-align : center;
+            align-items: center;
+            transition: border 0.4s ease 0s, background-color 0.4s ease 0s, top 0.2s ease 0s;
+        }
+
+        .r-nav .menu-btn {
+            background : url(./img/hamburger.png) 0% 0%/28px no-repeat;
+        }
+
+        .rm3 {
+            width : 32px;
+            height: 32px;
+            position:relative;
+            text-indent: -1000em;
+            display: block;
+        }
+        button {
+            margin-bottom :0;
+            border : none;
+            outline : none;
+            cursor : pointer;
+        }
+
+        .fg nav {
+            position:absolute;
+            top:0;
+            left:272px;
+            width:calc(100% - 622px);
+            z-index: 1;
+            height: 90px;
+            display: flex;
+            -webkit-box-align :center;
+            align-items :center;
+        }
+
+        .fg nav h2 {
+            position : absolute;
+            width:0px;
+            height:0px;
+            overflow: hidden;
+            z-index : -1;
+        }
+
+        .fg nav ul {
+            font-weight : 500;
+            display : flex;
+        }
+
+        .fg nav ul li {
+            white-space : nowrap;
+            font-size : 18px;
+            margin-right: 26px;
+        }
+
+        /* *******************검색 */
+
+        .gzRefZ { /***전체페이지 검색버튼 toggle 전*/
+            position:fixed;
+            overflow-y : scroll;
+            max-height : 100%;
+            top : 0px;
+            animation-direction: alternate;
+            width: 100%;
+            background-color: rgb(255,255,255);
+            z-index : 100;
+            transform : translateY(-100%);
+            visibility : hidden;
+            transition : transform 0.3s ease 0s, visibility 0.3s ease 0s;
+        }
+
+        .ksrLg {  /***전체페이지 검색버튼 toggle 후*/
+            position:fixed;
+            overflow-y: scroll;
+            max-height:100%;
+            top: 0px;
+            animation-direction: alternate;
+            width :100%;
+            background-color : rgb(255,255,255);
+            z-index : 100;
+            transform: translateY(0px);
+            visibility : visible;
+            transition: transform 0.3s ease 0s, visibility 0.3s ease 0s;
+        }
+
+        .jVXkbk { /* 내용 블럭 */
+            position:relative;
+            min-width : 600px;
+            max-width : 1440px;
+            margin : 0px auto;
+            padding : 102px 0px 80px;
+        }
+
+        .kJwJYF { /* input 공간 */
+            position:relative;
+            display: flex;
+            -webkit-box-align: center;
+            align-items : center;
+            width: 600px;
+            margin : 0px auto;
+        }
+
+        .kJwJYF::after { /* 검색창 밑에 선 */
+            content :"";
+            position:absolute;
+            bottom:0px;
+            left:0px;
+            width:100%;
+            height : 2px;
+            background-color:rgb(0,0,0);
+            display:block;
+        }
+
+        .jGnAEF {
+            width:100%;
+            height: 65px;
+            margin-right : 22px;
+            font-size : 24px;
+            line-height: 29px;
+        }
+
+        .gnoNld {
+            display : block;
+            text-indent : -1000em;
+            width : 28px;
+            height: 28px;
+            overflow : hidden;
+            flex : 0 0 auto;
+            background : url(./img/돋보기.png) 0% 0% /28px no-repeat;
+        }
+
+        /********* 최근 검색창 **********/
+        .kkSmvU {
+            width : 758px;
+            margin : 0px auto;
+        }
+
+        .bOxTgW {
+            position:relative;
+            margin-top : 80px;
+        }
+        
+        .eDSbxJ {
+            margin-bottom: 16px;
+            font-size : 16px;
+            line-height : 19px;
+            font-weight : 700;
+        }
+
+        .gZprqq {
+            width : 100%;
+        }
+
+        .eyjLlZ {
+            padding : 36px 0px;
+        }
+        
+        .hmUDBq {
+            width: 100%;
+            font-size : 13px;
+            color: rgb(0,0,0);
+            line-height: 16px;
+            text-align : center;
+        }
+
+        .eTRneP {  /* 검색 버튼 toggle 전 */
+            position: absolute;
+            width : 28px;
+            height : 28px;
+            display: block;
+            text-indent: -1000em;
+            overflow : hidden;
+            z-index : 1;
+            top : 30px;
+            right : 30px;
+            cursor :pointer;
+        }
+
+        .eTRneP::before {
+            position:absolute;
+            top : 13px;
+            left : 3px;
+            width : 23px;
+            height: 2px;
+            background-color : rgb(68,68,68);
+            display: block;
+            content : "";
+            opacity : 0;
+            transform : rotate(0deg);
+            transition : transform 0.4s ease 0.3s, opacity 0.4s ease;
+        }
+
+        .eTRneP::after {
+            position:absolute;
+            top : 13px;
+            left : 3px;
+            width : 23px;
+            height: 2px;
+            background-color : rgb(68,68,68);
+            display: block;
+            content : "";
+            opacity : 0;
+            transform : rotate(0deg);
+            transition : transform 0.4s ease 0.3s, opacity 0.4s ease;
+        }
+
+        .wXtFi {  /* 닫기 toggle 후 */
+            position:absolute;
+            width: 28px;
+            height: 28px;
+            display : block;
+            text-indent : -1000em;
+            overflow : hidden;
+            z-index : 1;
+            top: 30px;
+            right: 30px;
+            cursor : pointer;
+        }
+
+        .wXtFi::before {
+            position: absolute;
+            top : 13px;
+            left: 3px;
+            width: 23px;
+            height: 2px;
+            background-color: rgb(68,68,68);
+            display : block;
+            content : "";
+            opacity : 1;
+            transform : rotate(45deg);
+            transition : transform 0.4s ease 0.3s, opacity 0.4s ease;
+        }
+
+        .wXtFi::after {
+            position: absolute;
+            top: 13px;
+            left : 3px;
+            width: 23px;
+            height: 2px;
+            background-color : rgb(68,68,68);
+            display :block;
+            content : "";
+            opacity:1;
+            transform :rotate(-45deg);
+            transition : opacity 0.4s ease 0.3s, transform 0.4s ease;
+        }
+
+        .fAtBFN { /* toggle 후 */
+            position : fixed;
+            top: 0px;
+            left: 0px;
+            width : 100%;
+            height : 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index : 11;
+            opacity :  1;
+            visibility : visible;
+            transition : opacity 0.3 ease 0s, visibility 0.3s ease;
+            
+        }
+
+        .iFeRkU { /* toggle 전 */
+            position :fixed;
+            top : 0px;
+            left: 0px;
+            width : 100%;
+            height : 100%;
+            background-color : rgba(0,0,0,0.6);
+            z-index : 11;
+            opacity : 0;
+            visibility : hidden;
+            transition : opacity 0.3s ease 0s, visibility 0.3s ease 0s;
+            border: 2px solid red;
+        }
+
+        /******* side menu ****/
+
+        .kakfyC { /* side memu 누르기 전*/
+                position: fixed;
+                top: 0px;
+                left : 0px;
+                width: 0px;
+                height: 0px;
+                overflow: hidden;
+                transition : z-index 0.4s ease 0.4s;
+                z-index : -100;
+                opacity : 1;
+            }
+
+
+            .fgozys {  /* side menu 누른 후 */
+                position : fixed;
+                top : 0px;
+                left: 0px;
+                overflow: hidden;
+                transition : z-index 0s ease 0s;
+                width : 100%;
+                height: 100%;
+                z-index : 100;
+                opacity : 1;
+            }
+
+            .gdtYNR {
+                position : fixed;
+                top : 0px;
+                width : 380px;
+                height: 100%;
+                padding-top : 60px;
+                background-color : rgb(255,255,255);
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                z-index : 1;
+                transition : right 0.4s ease 0s;
+            }
+
+            .liahhj {
+                padding : 0px 40px 60px;
+            }
+
+            .liahhj > h2 a {
+                display : flex;
+                -webkit-box-align : center;
+                align-items : center;
+                cursor : pointer;
+            }
+
+            .liahhj > h2 a::after {
+                width : 9px;
+                height : 16px;
+                display : block;
+                margin-left : 8px;
+                background : url(./img/arr_login.png) center center / 100% no-repeat;
+                content : "";
+            }
+
+            /****side menu nav****/
+            nav {
+                display : block;
+            }
+
+            .uZaHK {
+                height : 100%;
+                padding: 0px 40px 40px;
+                overflow-y : auto;
+            }
+
+            .uZaHK h2:first-child {
+                margin-top : 0px;
+            }
+            
+            .uZaHK h2{
+                margin-top:40px;
+                font-size : 16px;
+                color : rgb(153,153,153);
+                font-weight : 400;
+                line-height: 19px;
+            }
+
+            .uZaHK ul li:first-child {
+                margin-top: 14px;
+            }
+
+            .uZaHK ul li {
+                margin-top:16px;
+                font-size : 24px;
+                color : rgb(68,68,68);
+                line-height: 29px;
+                font-weight: 700;
+            }
+
+            .uZaHK::-webkit-scrollbar {
+                width : 6px;
+                height: 6px;
+            }
+
+            .uZaHK::-webkit-scrollbar-thumb {
+                border-radius: 3px;
+                background:rgb(221,221,221);
+                margin-top : 20px;
+            }
+
+            .uZaHK::-webkit-scrollbar-track {
+                margin : 0px;
+                padding-right : 4px;
+                border-radius : 12px;
+                background-color : transparent;
+            }
+
+        /******* footer ************/
+            .chcvRc {
+                margin-top : auto;
+                padding : 27px 40px;
+                background-color: rgb(255,255,255);
+                display :flex;
+                -webkit-box-pack :  center;
+                justify-content: center;
+            }
+
+            .hwyIfC {
+                display :flex;
+                -webkit-box-pack : center;
+                justify-content: center;
+                -webkit-box-align : center;
+                align-items: center;
+            }
+
+            .hwyIfC > h2 {
+                width : 34px;
+                height: 34px;
+                background : url(./img/상담.png) center center / 100% no-repeat;
+                display : block;
+                text-indent : -1000em;
+                overflow: hidden;
+            }
+
+            .hwyIfC ul {
+                font-size : 16px;
+                font-weight : 700;
+                line-height: 19px;
+                display : flex;
+            }
+
+            .hwyIfC ul li {
+                display : flex;
+                -webkit-box-align: center;
+                align-items: center;
+            }
+
+            .hwyIfC ul li::before {
+                width : 1px;
+                height : 16px;
+                margin: 0px 10px;
+                background-color: rgb(221,221,221);
+                display: block;
+                content : "";
+            }
+
+            .hwyIfC ul li a {
+                padding : 0px 20px;
+                display : flex;
+                -webkit-box-pack : center;
+                justify-content: center;
+                cursor : pointer;
+            }
+
+            .dXOkqN { /* side menu 누르기 전 닫기 */
+                position:absolute;
+                top:30px;
+                right: 40px;
+                width: 28px;
+                display: block;
+                text-indent : -1000em;
+                z-index: 1;
+                overflow: hidden;
+            }
+
+            .dXOkqN::before,
+            .dXOkqN::after {
+                opacity : 0;
+                transition-delay : 0.2s;
+                position:absolute;
+                top : 13px;
+                left:3px;
+                width:23px;
+                height:2px;
+                background-color: rgb(68,68,68);
+                display: block;
+                content : "";
+                transition : transform 0.4s ease 0s, opacity 0.4s ease;
+            }
+
+            .bNzgXx { /* side menu 누르기 후 닫기*/
+                position:absolute;
+                top : 30px;
+                right : 40px;
+                width : 28px;
+                height : 28px;
+                display : block;
+                text-indent : -1000em;
+                overflow : hidden;
+                z-index : 1;
+                cursor: pointer;
+            }
+            
+            .bNzgXx::before {
+                opacity : 1;
+                transition-delay : 0.2s;
+                transform : rotate(45deg);
+            }
+
+            .bNzgXx::after {
+                opacity : 1;
+                transition-delay : 0.2s;
+                transform : rotate(-45deg);
+            }
+
+            .bNzgXx::before,
+            .bNzgXx::after {
+                opacity : 1;
+                transition-delay : 0.2s;
+                position:absolute;
+                top : 13px;
+                left:3px;
+                width:23px;
+                height:2px;
+                background-color: rgb(68,68,68);
+                display: block;
+                content : "";
+                transition : transform 0.4s ease 0s, opacity 0.4s ease;
+            }
+
+            .fTYzQQ{  /*화면 어둡게 하는부분 전*/
+                position: fixed;
+                top : 0px;
+                left: 0px;
+                width : 100%;
+                height : 100%;
+                background-color: rgba(0,0,0,0.5);
+                content : "";
+                transition : opacity 0.4s ease 0.2s;
+                opacity : 0;
+            }
+
+            .kxDJqV {  /*화면 어둡게 하는부분 후*/
+                position :fixed;
+                top : 0px;
+                left:0px;
+                width : 100%;
+                height : 100%;
+                background-color : rgba(0,0,0,0.5);
+                content : "";
+                transition : opacity 0.4s ease 0s;
+                opacity : 1;
+            }
+
+            /*******************main********************/
+
+            .wrap {
+                width : 1200px;
+                min-height : 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin : -50px auto;
+            }
+
+            .form {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                gap : 18px;
+            }
+
+            .form h2 {
+                width : 150px;
+                text-align: center;
+                margin : 0px auto;
+                margin-bottom: 50px;
+                font-weight: 700;
+                font-size : 30px;
+            }
+
+            .form .input-box {
+                width : 400px;
+                position : relative;
+            }
+
+            .form .input-box input {
+                padding: 35px 10px 10px 48px;
+                border : none;
+                width : 100%;
+                border-radius: 6px;
+                border: 1px solid #ddd;
+                outline : none;
+            }
+
+            /* focus 됐을 때, span 위치 바꾸기 */
+            .form .input-box input:valid ~span,
+            .form .input-box input:focus ~span
+            {
+                transform: translateX(-10px) translateY(-10px);
+                font-size : 0.5em;
+                letter-spacing: 0.1em;
+            }
+
+            .form .input-box input:focus {
+                border: 1px solid #2AC1BC;
+            }
+
+            .form .input-box input[type="checkbox"]{
+                border: 1px solid #ddd;
+            }
+            .form .input-box span {
+                position: absolute;
+                left : 0;
+                padding: 22px 12px 12px 48px;
+                pointer-events: none;
+                font-size : 0.9rem;
+                transition: 0.5s;
+                letter-spacing: 0.05em;
+                color : #ddd;
+            }
+
+            .form .input-box i {
+                position :absolute;
+                top : 20px;
+                left : 16px;
+                width: 25px;
+                padding : 5px 0;
+                padding-right : 8px;
+                color :rgb(203, 202, 202);
+            }
+            
+            /* checkbox */
+
+            .check-box {
+                width : 100%;
+                padding : 10px;
+            }
+
+            .check-box span {
+                width : 200px;
+                font-weight: 100;
+                font-size: 14px;
+                margin-right: 10px;
+                color :#c8c6c6;
+            }
+
+            .toggler-wrapper {
+                display: inline-block;
+                width: 45px;
+                height: 25px;
+                cursor: pointer;
+                position: absolute;
+                padding-left : 2px;
+                
+                }
+
+            .toggler-wrapper input[type="checkbox"] {
+                display: none;
+                }
+
+            .toggler-wrapper input[type="checkbox"]:checked+.toggler-slider {
+                background-color: #2AC1BC;
+                }
+
+            .toggler-wrapper .toggler-slider {
+                background-color: #ccc;
+                position: absolute;
+                border-radius: 100px;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                -webkit-transition: all 300ms ease;
+                transition: all 300ms ease;
+                }
+
+            .toggler-wrapper .toggler-knob {
+                position: absolute;
+                -webkit-transition: all 300ms ease;
+                transition: all 300ms ease;
+                }
+
+            /*Style 11*/
+
+            .toggler-wrapper.style-11 input[type="checkbox"]:checked+.toggler-slider:after {
+                content: 'On';
+            }
+
+            .toggler-wrapper.style-11 input[type="checkbox"]:checked+.toggler-slider .toggler-knob {
+                left: calc(100% - 19px - 3px);
+            }
+
+            .toggler-wrapper.style-11 .toggler-slider:after {
+                content: 'Off';
+                position: absolute;
+                top: 50%;
+                right: -25px;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                font-size: 75%;
+                text-transform: uppercase;
+                font-weight: 500;
+                opacity: 0.7;
+            }
+
+            .toggler-wrapper.style-11 .toggler-knob {
+                width: calc(25px - 6px);
+                height: calc(25px - 6px);
+                border-radius: 50%;
+                left: 3px;
+                top: 3px;
+                background-color: #fff;
+            }
+
+            /* button */
+            .submit {
+                width : 400px;
+                height : 80px;
+                line-height:50px;
+                margin-top : 50px;
+            }
+
+            .submit .active {
+                width : 100%;
+                height : 65px;
+                border-radius: 7px;
+                background : #ddd;
+                border: none;
+                cursor: pointer;
+            }
+
+            .submit .focus {
+                width : 100%;
+                height : 65px;
+                border-radius: 7px;
+                background : #2AC1BC;
+                border: none;
+                cursor: pointer;
+                color: white;
+            }
+
+            /* sns login */
+            .sns {
+                width : 400px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap : 20px;
+            }
+
+            /* find */
+            .find {
+                width : 400px;
+                margin-top : 20px;
+            }  
+
+            .find ul {
+                width : 100%;
+                display : flex;
+                gap : 10px;
+                justify-content: center;
+                font-size : 14px;
+                font-weight: 200;
+                color : #898888;
+                cursor: pointer;
+                position: relative;
+            }
+
+            .find ul li {
+                width : 90px;
+                position:relative;
+                left: -27px;
+                text-align: center;
+            }
+
+            .find ul li::after {
+                position: absolute;
+                content: "";
+                padding-right : 20px;
+                width: 1px;
+                height : 13px;
+                top: 6px;
+                border-right :1px solid #c1c0c0;
+            }
+
+            .find ul li:last-child{
+                margin-left: 7px;
+            }
+
+            .find ul li:last-child::after{
+                display: none;
+            }
+
+            
+    /************footer**************/
+        .moonbanggu-footer {
+            margin-top: auto;
+            padding: 70px 0 100px 0;
+            background-color : #fafafa;
+        }
+
+        .moonbanggu-footer .moonbanggu-inner {
+            position :relative;
+            width:1200px;
+            margin : 0 auto;
+            display : flex;
+            align-items: flex-start;
+        }
+
+        .KDmtN {
+            margin-right : 180px;
+        }
+
+        .KDmtN span {
+            width: 172px;
+            height : 40px;
+            position : relative;
+            text-indent: -1000em;
+            display:block;
+            background : url(./img/다운로드.png) 0% 0% /100% no-repeat;
+            overflow: hidden;
+        }
+
+        .cNRQml {
+            padding-top : 4px;
+        }
+
+        .bYqeUY {
+            font-size: 16px;
+            color : rgb(68,68,68);
+            line-height: 24px;
+            display : flex;
+        }
+
+        .bYqeUY ul {
+            display : flex;
+        }
+
+        .bYqeUY ul li {
+            margin-right : 24px;
+        }
+
+        .djcfpw {
+            display : block;
+        }
+
+        .moonbanggu-footer .sns-insta {
+            font-size : 16px;
+            font-weight : 700;
+            line-height : 24px;
+            white-space: nowrap;
+            display : flex;
+            align-items: center;
+        }
+
+        .moonbanggu-footer .sns-insta::before {
+            width: 24px;
+            height: 24px;
+            margin-right : 6px;
+            background : url(./img/icon_footer_insta.png) no-repeat;
+            background-size : 24px auto;
+            display: inline-block;
+            content:"";
+        }
+
+        .ezaeWY {
+            font-size : 16px;
+            font-weight : 700;
+            line-height : 24px;
+            display : flex;
+            -webkit-box-align: center;
+            align-items: center;
+        }
+
+        .hIzKoN {
+            margin-top : 14px;
+            color : rgb(153,153,153);
+            display : flex;
+            flex-wrap : wrap;
+        }
+
+        .hIzKoN p {
+            margin-top : 12px;
+            font-size : 13px;
+            line-height: 16px;
+            display : inline-block;
+        }
+
+        .hIzKoN p::after {
+            width : 1px;
+            height : 10px;
+            margin : 0 12px;
+            background-color: rgb(204,204,204);
+            display:inline-block;
+            content : "";
+        }
+
+        .hIzKoN p > button {
+            font-size : inherit;
+            color : inherit;
+            text-decoration: underline;
+            vertical-align: top;
+            background : none;
+            outline : none;
+        }
+
+        .eFIwwb {
+            transition : all 200ms ease-in 0s;
+            visibility: hidden;
+            opacity : 0;
+        }
+
+        .toast-box {
+            position : fixed;
+            bottom:30px;
+            left : 50%;
+            min-width : 280px;
+            max-width : 800px;
+            min-height : 19px;
+            padding: 14px 34px;
+            font-size : 16px;
+            color : #fff;
+            line-height: 19px;
+            text-align: center;
+            word-break : keep-all;
+            background : rgba(0,0,0,0.78);
+            border-radius: 100px;
+            transform : translateX(-50%);
+            display : flex;
+            flex-direction: column;
+            align-items: center;
+            z-index : 100;
+        }
+        </style>
+    </head>
+
+    
+    <body>
+        <div id="root">
+            <div class="root main">
+                <div class="whole">
+                    <header class="hd fg" style="transform: translateY(-1px);">
+                        <div class="top">
+                            <h1 class="logo">
+                                <a href="main.html" class="logo-img">배민문방구</a>
+                            </h1>
+                            <div class="r-nav">
+                                <h2>공통 메뉴</h2>
+
+                                <ul>
+                                    <li>
+                                        <button class="search-btn rm1" onclick="search_bar()">검색</button>
+                                    </li>
+
+                                    <li>
+                                        <a class="cart-btn rm2" href="cart.html">
+                                            "장바구니"
+                                            "0"
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="signin" href="signin.html">로그인</a>
+                                    </li>
+
+                                    <li>
+                                        <button class="menu-btn rm3">메뉴</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <nav class="nav">
+                            <h2>카테고리 메뉴</h2>
+                            <ul>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">전체</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">문구</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">리빙</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">책/매거진F</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">배민그린</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">배달이친구들</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">콜라보레이션</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="">명예의 전당</a></li>
+                                <li style="color:rgb(0,0,0); line-height:19.9px;"><a href="Q&A-list.html">Q&A</a></li>
+                            </ul>
+                        </nav>
+                    </header>
+
+                    <!-- 검색 -->
+                    <div class="sc-fIkgrG gzRefZ"> <!-- 전체 -->
+                        <div class="sc-bQdwJz jVXkbk"> <!-- 내용 블럭 -->
+                            <div class="sc-evcquM kJwJYF"> <!-- 인풋 공간 -->
+                                <input type="text" placeholder="검색어를 입력하세요." class="sc-CVGMF jGnAEF" value>
+                                <button class="sc-fvWJJf gnoNld"></button>
+                            </div>
+
+                            <div class="sc-iaVDus kkSmvU">
+                                <section class="bOxTgW">
+                                    <h3 class="eDSbxJ">최근 검색어</h3>
+                                    <div class="gZprqq">
+                                        <div class="eyjLlZ">
+                                            <div class="hmUDBq">최근 검색어가 없어요.</div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <a class="eTRneP" id="close">닫기</a> <!-- toggle 만들어주기 -->
+                        </div>
+                    </div>
+
+                    <div class="iFeRkU"></div> <!-- 검색 눌렀을 때 바탕 어둡게  -->
+
+                        <div class="kakfyC"> <!-- side 메뉴 버튼  -->
+                            <div class="gdtYNR" style = "right : -380px">
+                                <header class="liahhj">
+                                    <h2>"앗!"<br>
+                                    <a href="signin.html" class="txt">
+                                        "로그인이 필요해요"
+                                    </a>
+                                </h2>
+                                </header>
+                                <footer class="chcvRc">
+                                    <div class="hwyIfC">
+                                        <h2>고객센터</h2>
+                                        <ul>
+                                            <li><a href="">1:1 문의</a></li>
+                                            <li><a href="" target="_blank" rel="noreferrer">이메일 문의</a></li>
+                                        </ul>
+                                    </div>
+                                </footer>
+                                <a class="dXOkqN">닫기</a> <!-- side menu 닫기-->
+                            </div>
+                            <div class="fTYzQQ"></div> <!-- 배경 어둡게 하는 부분-->
+                        </div>
+
+                                
+                        <!------------------- main --------------------->
+
+                                    <div class="wrap">
+                                        <div class="form">
+                                            <h2>로그인</h2>
+
+                                            <div class="input-box">
+                                                <input type="text" required="required" id="input-email" autofocus="">
+                                                <i class="fa-regular fa-user"></i>
+                                                <span>아이디</span>
+                                            </div>
+
+                                            <div class="input-box">
+                                                <input type="password" required="required" id="input-password" onkeydown="enter(event)">
+                                                <i class="fa-sharp fa-solid fa-lock"></i>
+                                                <span>비밀번호</span>
+                                            </div>
+
+                                            <div class="check-box">
+                                                <span>아이디 저장</span> 
+                                                <label class="toggler-wrapper style-11">
+                                                    <input type="checkbox" id="remember-check">
+                                                    <div class="toggler-slider">
+                                                    <div class="toggler-knob"></div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="submit">
+                                            <button class="btn btn-info w-100 loginBtn active" type="button" onclick="signIn()" disabled>Log In</button>
+                                        </div>
+
+                                        <div class="sns">
+                                            <!-- kakao login -->
+                                            <a id="kakao-login-btn">
+                                                <img src="./img/kakaotalk_logo_icon_147272.png" alt="">
+                                            </a>
+                                            <!-- <button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button> -->
+
+                                            <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+                                            <div id="naver_id_login"></div>
+
+                                        </div>
+
+                                        <div class="find">
+                                            <ul>
+                                                <li><a href="signup.html">회원가입</a></li>
+                                                <li><a href="forgetPW.html">아이디 찾기</a></li>
+                                                <li><a href="forgetPW.html">비밀번호 찾기</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- footer -->
+                                    <div class="moonbanggu-footer">
+                                        <div class="moonbanggu-inner">
+                                            <h2 class="KDmtN">
+                                                <span>배민문방구</span>
+                                            </h2>
+    
+                                            <div class="cNRQml">
+                                                <nav class="bYqeUY">
+                                                    <ul>
+                                                        <li><a class="djcfpw" href="#">About</a></li>
+                                                        <li><a class="djcfpw" href="#">공지사항</a></li>
+                                                        <li><a class="djcfpw" href="#">이용약관</a></li>
+                                                        <li><a class="djcfpw" href="#">개인정보처리방침</a></li>
+                                                        <li><a class="djcfpw" href="#">대량구매/제휴안내</a></li>
+                                                    </ul>
+    
+                                                    <p class="link-sns">
+                                                        <a href="#" class="ezaeWY sns-insta" target="_black">@baemin_store</a>
+                                                    </p>
+                                                </nav>
+    
+                                                <div class="hIzKoN">
+                                                    <p>상호 : (주)우아한형제들</p>
+                                                    <p>대표 : 이국환</p>
+                                                    <p>사업자등록번호 : 120-87-65763</p>
+                                                    <p>통신판매업신고번호 : 2021-서울송파-0515</p>
+                                                    <p>
+                                                        <button>사업자정보확인</button>
+                                                    </p>
+                                                    <p>대표번호 : 1670-9902</p>
+                                                    <p>이메일 : marketing_store@woowahan.com</p>
+                                                    <p>주소 : 서울특별시 송파구 위례성대로 2 장은빌딩</p>
+                                                    <p>호스팅제공 : (주)우아한형제들</p>
+                                                    <p class="copyright">© Woowa Brothers Corp. All rights reserved</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="eFIwwb">
+                                    <div class="toast-box" style="z-index:9999;"></div>
+                                </div>
+
+
+        <!-- JAVASCRIPT -->
+        <script src="main.js"></script>
+        <script src="util.js"></script>
+        <script src="session.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenujs/metismenujs.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/feather-icons/feather.min.js"></script>
+
+        <script>
+        // 아이디 저장하기 쿠키에 아이디 값이 있으면, id input에 출력
+        let keepID = getCookie("keepID");
+            console.log(keepID)
+            if(keepID){
+            let id = document.getElementById("input-email");
+            id.value = keepID;
+            }
+        </script>
+
+<!-- kakao login -->
+        <script type="text/javascript">
+            function unlinkApp() {
+                Kakao.init('bda75928df31179bbe85a4f20797466d');
+                Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function(res) {
+                    alert('success: ' + JSON.stringify(res))
+                },
+                fail: function(err) {
+                    alert('fail: ' + JSON.stringify(err))
+                },
+                })
+            
+        }
+        </script>
+
+<!-- kakao login -->
+<script type="text/javascript">
+    // kakao button custom . 
+    document.getElementById("kakao-login-btn").addEventListener("click",function(){
+        Kakao.init('bda75928df31179bbe85a4f20797466d');
+        console.log(Kakao.isInitialized());
+
+        Kakao.Auth.login({
+        //container: '#kakao-login-btn',
+        success: function(authObj) {
+        Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(result) {
+            id = result.id
+            connected_at = result.connected_at
+            kakao_account = result.kakao_account
+            let profile = kakao_account.profile
+            console.log(kakao_account)
+            email ="";
+            gender = "";
+            
+            if(typeof kakao_account != 'undefined'){
+                if(JSON.parse(localStorage.getItem("kakaoID"))){
+                    let kakao = JSON.parse(localStorage.getItem("kakaoID"));
+                    kakao.push({ 
+                        id : result.id,
+                        name : profile.nickname,
+                        gender : kakao_account.gender,
+                        birthday : kakao_account.birthday,
+                    });
+
+                    localStorage.setItem("kakaoID",JSON.stringify(kakao));
+                    alert("로그인 성공");
+                    location.href = "/main2.html";
+                }else {  // 회원정보가 없으면
+                    let tem = [{
+                        id : result.id,
+                        name : profile.nickname,
+                        gender : kakao_account.gender,
+                        birthday : kakao_account.birthday,
+                    }]
+                    // kakao 회원정보 따로 storage에 저장
+                    localStorage.setItem("kakaoID",JSON.stringify(tem));
+                    alert("로그인 성공");
+                    location.href = "/main2.html";
+                }
+                }
+                
+            
+            },
+                fail: function(error) {
+                alert(
+                    'login success, but failed to request user information: ' +
+                    JSON.stringify(error)
+                )
+                },
+            })
+            },
+            fail: function(err) {
+            alert('failed to login: ' + JSON.stringify(err))
+            },
+        })
+    })
+    
+            <!-- 네이버아디디로로그인 초기화 Script -->
+            var naver_id_login = new naver_id_login("C1BBK9ltJ3tXeKdQMD4v", "http://127.0.0.1:5500/callback.html");
+            var state = naver_id_login.getUniqState();
+            naver_id_login.setButton("green", 1,40);
+            naver_id_login.setDomain(".service.com");
+            naver_id_login.setState(state);
+            naver_id_login.setPopup();
+            naver_id_login.init_naver_id_login();
+
+            
+            // 네이버아디디로로그인 Callback페이지 처리 Script 
+                // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+                function naverSignInCallback() {
+                    // naver_id_login.getProfileData('프로필항목명');
+                    // 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+                    alert(naver_id_login.getProfileData('email'));
+                    alert(naver_id_login.getProfileData('nickname'));
+                    alert(naver_id_login.getProfileData('age'));
+                }
+
+                // 네이버 사용자 프로필 조회
+                naver_id_login.get_naver_userprofile("naverSignInCallback()");
+        </script>
+    </body>
+</html>
