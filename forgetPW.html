@@ -762,15 +762,6 @@
                 margin : 0 auto;
                 padding-top : 20px;
             }
-
-            .account-title {
-                padding-bottom : 40px;
-                font-size : 32px;
-                font-weight : 700;
-                line-height: 42px;
-                text-align: center;
-            }
-
         /***************tabs*******************/
         .tabs {
             position:relative;
@@ -783,7 +774,6 @@
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
             margin : 0 auto;
-
         }
 
         .tabs .list li {
@@ -793,12 +783,29 @@
             text-align: center;
             position: relative;
             left: 10px;
+            line-height: 50px;
         }
 
-        .tabs .list li.active {
-            border-bottom: 2px solid black;
+    
+        .tabs .list .btn {
+            font-size : 20px;
         }
 
+        .tabs .find-content-info.active{
+            display : block;
+        }
+
+        .tabs .find-content-info {
+            position:absolute;
+            top : 50px;
+            left : 0;
+            text-align: center;
+            width : 400px;
+            height : 500px;
+            display: none;
+        }
+
+        
 
         </style>
     </head>
@@ -904,8 +911,6 @@
         <!-- content -->
         <div class="wrap">
             <div class="account-wrap">
-                <h2 class="account-title"></h2>
-
                     <div class="tabs">
                         <ul class="list">
                             <li class="active">
@@ -916,9 +921,10 @@
                                 <a href="#tab2" class="btn">비밀번호 찾기</a>
                             </li>
                         </ul>
+                    </div> <!-- tabs fin -->
 
                         <div class="find-content-info">
-                            <div id="tab1">
+                            <div id="tab1" class="cont active">
                                 <h3 class="title">아이디를 깜빡하셨나요?</h3>
                                 <p class="ment">가입 시 입력하신 정보로 아이디를 찾아보세요.</p>
                                 <form>
@@ -946,7 +952,7 @@
                                 </form>
                             </div> <!-- tab1 fin -->
 
-                            <div id="tab2">
+                            <div id="tab2" class="cont">
                                 <p class="ment">가입한 아이디를 입력해주세요.</p>
 
                                 <form>
@@ -966,7 +972,7 @@
                                 </form>
                             </div> <!-- tab2 fin -->
 
-                            <div id="tab3">
+                            <div id="tab3" class="cont">
                                 <p class="ment">변경할 비밀번호를 입력해주세요.</p>
 
                                 <form>
@@ -995,9 +1001,35 @@
                             
 
                         </div> <!-- find-content-info fin -->
-                    </div> <!-- tabs fin -->
+                    
                 </div>
         </div>
+
+        <script>
+            let tabList = document.querySelectorAll('.tabs .list li');
+            let contents = document.querySelectorAll(".tabs .find-content-info .cont");
+            let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
+
+            for(let i =0; i < tabList.length; i++) {
+                tabList[i].querySelector(".btn").addEventListener("click",function(e){
+                    e.preventDefault();
+                        for(let j=0; j<tabList.length; j++){
+                            // 나머지 버튼 클래스 제거
+                            tabList[j].classList.remove("active");
+
+                            //나머지 컨텐츠 display:none 처리
+                            contents[j].style.display = "none";
+                        }
+
+                        // 버튼 관련 이벤트
+                        this.parentNode.classList.add("active");
+
+                        //버튼 클릭시 컨텐츠 전황
+                        activeCont = this.getAttribute("href");
+                        document.querySelector(activeCont).style.display = 'block';
+                })
+            }
+        </script>
 
         <!-- JAVASCRIPT -->
         <script src="main.js"></script>

@@ -2,19 +2,19 @@ const id_check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]
 // 영문 숫자 특수기호 조합 8자리 이상
 const password = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
 
-let members = [{id:'hyelim91',
-              name:'김혜림',
-              pw :'gpfla0822!',
-              email :'hyelim0822@naver.com',
-              phone : '010-2866-4146',
-              role : "user",
-              },
-              {id:'hsj',
-              name:'현상주',
-              pw :'test123123!',
-              email :'hsj@naver.com',
-              role : "user",
-              }]
+// let members = [{id:'hyelim91',
+//               name:'김혜림',
+//               pw :'gpfla0822!',
+//               email :'hyelim0822@naver.com',
+//               phone : '010-2866-4146',
+//               role : "user",
+//               },
+//               {id:'hsj',
+//               name:'현상주',
+//               pw :'test123123!',
+//               email :'hsj@naver.com',
+//               role : "user",
+//               }]
 
   /************ cookie값이 있는지 확인, 없으면 로그인 */
 let except = ["http://127.0.0.1:5500/main.html", // 메인
@@ -23,6 +23,12 @@ let except = ["http://127.0.0.1:5500/main.html", // 메인
               "http://127.0.0.1:5500/signup.html", // 회원가입 페이지
               "http://127.0.0.1:5500/forgetPW.html", // 비밀번호 찾기 페이지
             ];
+
+/*******************현재 페이지를 확인해서 except에 넣어주기 */
+let url = window.location.href;
+            if(url.includes("signin")){
+              except.push(url);
+            }
 
   window.onload = function(){
     let cookies = getCookie("login");
@@ -44,7 +50,7 @@ function enter(event){
   let loginInput = document.getElementById("input-password");
   let modiInput = document.getElementById("floatingPasswordCheck");
   let forget = document.getElementById("input-confirmpassword");
-  let signupBirth = document.getElementById("input-birth");
+  let signupEmail = document.getElementById("input-email");
 
     if(event.keyCode === 13){
       console.log("엔터눌렀다")
@@ -54,7 +60,7 @@ function enter(event){
         modify(event);
       }else if(event.target == forget){
         forgetPw(event);
-      }else if(event.target == signupBirth){
+      }else if(event.target == signupEmail){
         submit(event);
       }
       
@@ -83,9 +89,8 @@ function enter(event){
       pwInput.addEventListener("input",loginBTN);
   }
 
-  if(document.getElementById("input-birth")){
-    let signupBirth = document.getElementById("input-birth");
-    console.log(signupBirth)
+  if(document.getElementById("input-email")){
+    let signupBirth = document.getElementById("input-email");
     signupBirth.addEventListener("input",signupBTN);
   } 
     
@@ -122,16 +127,19 @@ function enter(event){
     }
 
 
-    /*************************************** */
+    /*************************************** 핸드폰 번호 실시간 하이픈 추가 */
         
         // 휴대폰 번호 입력 필드의 값을 모니터링하고 실시간으로 하이픈을 추가합니다.
-        var phoneNumberInput = document.getElementById('input-phone');
+        if(document.getElementById('input-phone')){
+          var phoneNumberInput = document.getElementById('input-phone');
 
-        phoneNumberInput.addEventListener('input', function() {
-          var formattedNumber = phoneNumberInput.value.replace(/[^0-9]/g, '') //숫자를 제외한 모든 문자 제거
-                                                      .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
-          phoneNumberInput.value = formattedNumber;
-        });
+          phoneNumberInput.addEventListener('input', function() {
+            var formattedNumber = phoneNumberInput.value.replace(/[^0-9]/g, '') //숫자를 제외한 모든 문자 제거
+                                                        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+            phoneNumberInput.value = formattedNumber;
+          });
+        }
+    
 
 
 /*********************** main page 검색 눌렀을 때 */
@@ -309,52 +317,108 @@ function enter(event){
 /**********************  회원가입 */ 
 function submit() {
     let checked = valid();
-
+    
     // 검증 완료
     if(checked){
         let id = document.getElementById('input-id').value;
-        let userName = document.getElementById('input-username').value;
+        let userName = document.getElementById('input-name').value;
         let pw = document.getElementById('floatingPassword').value;
         let pwCheck = document.getElementById('floatingPasswordCheck').value;
         let email = document.getElementById('input-email').value;
         let phone = document.getElementById('input-phone').value;
+        let birth = document.getElementById('input-birth').value;
 
-        // 객체에 key ,value 값으로 넣어준다
-        let info = {};
-        info.id = id;
-        info.userName = userName;
-        info.pw = pw;
-        info.email = email;
-        info.phone = phone;
-        
-       // 중복 이메일 검사
-        for(let i=0; i<members.length; i++){
-        if(members[i].id == info.id){
-            alert("이미 존재하는 아이디 입니다");
-            return;
-        }
-      }
-       // 이메일이 없으면 배열에 객체 넣어주기
-        members.push(info);
-        sessionStorage.setItem("members",JSON.stringify(info))
-        alert("회원가입이 완료되었습니다.");
-        location.href="/main2.html";
-    
-    // 검증이 안됐으면 return
-      }else {
-            return;
-      }
-}
+        Object.keys(localStorage).forEach((key) => {
+          
+          if(key.includes("members")){ // members key값이 이미 있으면,
+            let member = JSON.parse(localStorage.getItem(key)); // key의 value 가져오기
+            
+                for(let i=0; i<member.length; i++) { // value 값 가져오기
+                  if(member[i].id == id){ // 이미 아이디가 있으면,
+                    alert("이미 존재하는 아이디 입니다");
+                    return;
+                  }else { //아이디가 없고
+                    if(birth == undefined || birth == ""){ // 생일을 입력안했으면,
+                      // 원래 key값에 push로 저장
+                      member.push ({
+                        id : id,
+                        userName : userName,
+                        pw : pw,
+                        email : email,
+                        phone : phone,
+                        birth : "",
+                      })
+                      //세션에 저장
+                      localStorage.setItem("members",JSON.stringify(member));
+                      alert("회원가입이 완료되었습니다.");
+                      location.href=`signin.html?id=${id}`;
 
+                    } else { // 생일을 입력했으면,
+                      // 원래 key값에 push로 저장
+                      member.push ({
+                        id : id,
+                        userName : userName,
+                        pw : pw,
+                        email : email,
+                        phone : phone,
+                        birth : birth,
+                      })
+
+                      //세션에 저장
+                      localStorage.setItem("members",JSON.stringify(member));
+                      alert("회원가입이 완료되었습니다.");
+                      location.href=`signin.html?id=${id}`;
+                    }
+                    break;
+                  }
+                }
+            }else if(JSON.parse(localStorage.getItem("members")) == undefined){ // members라는 key값이 없으면
+              if(birth == undefined || birth == ""){ // birth를 입력안했으면,
+                // 객체에 key ,value 값으로 넣어준다
+                let info = [{
+                  id : id,
+                  userName : userName,
+                  pw : pw,
+                  email : email,
+                  phone : phone,
+                  birth : birth,
+                }];
+
+                // 세션에 값 저장
+                localStorage.setItem("members",JSON.stringify(info))
+                alert("회원가입이 완료되었습니다.");
+                location.href=`signin.html?id=${id}`;
+              } else { // birth값을 입력 했으면,
+                 // 객체에 key ,value 값으로 넣어준다
+                  let info = [{
+                    id : id,
+                    userName : userName,
+                    pw : pw,
+                    email : email,
+                    phone : phone,
+                    birth : birth,
+                  }];
+
+                // 세션에 값 저장
+                localStorage.setItem("members",JSON.stringify(info))
+                alert("회원가입이 완료되었습니다.");
+                location.href=`signin.html?id=${id}`;
+              }
+            }
+          });
+    }
+  }
+
+  
 /*************** 값 검증 */
 function valid(){
   
     let id = document.getElementById('input-email')
-    let userName = document.getElementById('input-username')
+    let userName = document.getElementById('input-name')
     let pw = document.getElementById('floatingPassword')
     let pwCheck = document.getElementById('floatingPasswordCheck')
     let email = document.getElementById('input-email')
-        let phone = document.getElementById('input-phone')
+    let phone = document.getElementById('input-phone')
 
     // id 값이 비었는지 확인
     if(id.value == undefined || id.value == ""){
@@ -437,51 +501,51 @@ function valid(){
 function signIn(){
 
   // id,pw 맞는지 확인
-  let id = document.getElementById("input-email");
+  let id = document.getElementById("input-id");
   let pw = document.getElementById('input-password');
   let loginCheck = false;
   
-  for(let i=0; i<members.length; i++) {
-     // id가 같은지 확인
-    if(members[i].id == id.value){
-       // id가 같고 비번까지 같은지 확인
-        if(members[i].pw == pw.value){
-          
-          // remember 로그인 체크시
-          let checkbox = document.getElementById("remember-check").checked;          
-          console.log(checkbox);
-          if(checkbox){
-            // 한달 후 까지 60초 * 60분 * 24시간 * 30일
-            setCookie("keepID",members[i].id,{secure:true,'max-age':60*60*24*30})
+  Object.keys(localStorage).forEach(key => {
+    
+      if(key == "members"){
+        let value = JSON.parse(localStorage.getItem(key));
+          for(let i =0; i <value.length ; i++) {
+          // id가 같은지 확인
+          if(value[i].id == id.value) {
+            // id가 같고 비번까지 같은지 확인
+            if(value[i].pw == pw.value){
+              // remember 로그인 체크시
+                let checkbox = document.getElementById("remember-check").checked;          
+                console.log(checkbox);
+                if(checkbox){
+                  // 한달 후 까지 60초 * 60분 * 24시간 * 30일
+                  setCookie("keepID",value[i].id,{secure:true,'max-age':60*60*24*30})
+                }
+                // for문 끝내기위해 true
+                  loginCheck = true;
+                  // 쿠키 등록
+                  setCookie('login',value.id,{secure: true, 'max-age': 1200});
+                  alert('로그인 성공');
+
+                  // 메인페이지로 이동
+                  location.href="/main2.html"
+                  }else{ // id는 맞지만 비번이 틀렸을 때
+                    alert("비밀번호가 다릅니다.");
+                    pw.focus();
+                    pw.value = "";
+                    return;
+                }
+              }
           }
-          // for문 끝내기위해 true
-            loginCheck = true;
-            // log-in 여부 
-            members[i].loginYn = "Y"
-            
-            // 쿠키 등록
-            setCookie('login',members[i].id,{secure: true, 'max-age': 1200});
-            alert('로그인 성공');
-
-            // 메인페이지로 이동
-            location.href="/main2.html"
           
-        }else{ // id는 맞지만 비번이 틀렸을 때
-          alert("비밀번호가 다릅니다.");
-          pw.focus();
-          pw.value = "";
-          return;
         }
-    }
+  });
+          // 입력한 id가 없으면
+          if (!loginCheck) {
+            alert("없는 아이디 입니다.");
+            id.value= "";
+            id.focus();
   }
-
-  // 입력한 id가 없으면
-  if (!loginCheck) {
-    alert("없는 아이디 입니다.");
-    id.value= "";
-    id.focus();
-  }
-  
 }
 
 
