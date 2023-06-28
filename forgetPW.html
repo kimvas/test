@@ -764,49 +764,172 @@
             }
         /***************tabs*******************/
         .tabs {
-            position:relative;
-            width : 400px;
-        }
-
-        .tabs .list {
-            width : 350px;
-            overflow: hidden;
+            width:400px;
+            font-size: 20px;
+            height:50px;
             border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin : 0 auto;
-        }
-
-        .tabs .list li {
-            float : left;
-            margin-right : 14px;
-            width : 150px;
             text-align: center;
-            position: relative;
-            left: 10px;
             line-height: 50px;
+            display: flex;
         }
 
-    
-        .tabs .list .btn {
-            font-size : 20px;
+        .tab_list{
+            width : 200px;
+            height : 100%;
+            text-align: center;
+            box-sizing: border-box;
         }
 
-        .tabs .find-content-info.active{
+        .tab_active {
+            border-bottom: 1px solid black;
+        }
+
+        .tab_list a{
+            display:block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            line-height: 50px;
+            color: #222;
+        }
+
+        .tab_container{
+            width : 400px;
+            min-height: 500px;
+            position:relative;
+        }
+        
+        .tab_content {
+            display: none;
+            width:100%;
+            min-height: 600px;
+            box-sizing: border-box;
+        }
+
+        .tab_content:first-child {
             display : block;
         }
 
-        .tabs .find-content-info {
-            position:absolute;
+        .tab_content .title {
+            font-size: 16px;
+            font-weight : 500;
+            position : absolute;
             top : 50px;
-            left : 0;
-            text-align: center;
-            width : 400px;
-            height : 500px;
-            display: none;
+            left : 50px;
         }
 
-        
+        .tab_content .ment {
+            position : absolute;
+            font-size : 14px;
+            top : 80px;
+            left : 50px;
+        }
 
+        .tab_content form {
+            position:relative;
+            width : 100%;
+            height : 100%;
+            top : 150px;
+        }
+
+        .tab_content .find-content {
+            width : 100%;
+            height : 100%;
+        }
+
+        .tab_content form .input-box {
+            width : 400px;
+            height : 100px;
+            position : relative;
+        }
+
+        .tab_content .input-box input {
+                padding: 28px 12px 12px 48px;
+                box-sizing: border-box;
+                border : none;
+                width : 100%;
+                border-radius: 6px;
+                border: 1px solid #ddd;
+                outline : none;
+        }
+
+        .tab_content .input-box input:focus {
+            border: 1px solid #2AC1BC;
+        }
+
+        .tab_content .input-box input:valid ~ .label,
+        .tab_content .input-box input:focus ~ .label
+        {
+            transform: translateX(-8px) translateY(-10px);
+                font-size : 0.5em;
+                letter-spacing: 0.1em;
+        }
+
+
+        .tab_content .input-box .label {
+                position: absolute;
+                left : 0;
+                padding: 18px;
+                pointer-events: none;
+                font-size : 0.9rem;
+                transition: 0.5s;
+                letter-spacing: 0.05em;
+                color : #ddd;
+        }
+
+
+        .tab_content .input-box .required:before {
+                content :"필수";
+                position : absolute;
+                width : 40px;
+                height: 30px;
+                right : 10px;
+                top : 18px;
+                text-align: center;
+                font-style :normal;
+                font-size : 0.8em;
+                z-index: 2;
+            }
+
+        .tab_content .input-box .required::after {
+            content : "";
+            position: absolute;
+            width : 25px;
+            height : 5px;
+            right: 17px;
+            bottom : 62px;
+            font-style: normal;
+            background:#2AC1BC;
+            z-index: 1;
+        } 
+
+        /* button */
+        .submit {
+                width : 400px;
+                height : 80px;
+                line-height:50px;
+                margin-top : 0px;
+            }
+
+            .submit .active {
+                width : 100%;
+                height : 65px;
+                border-radius: 7px;
+                background : #ddd;
+                border: none;
+                cursor: pointer;
+            }
+
+            .submit .focus {
+                width : 100%;
+                height : 65px;
+                border-radius: 7px;
+                background : #2AC1BC;
+                border: none;
+                cursor: pointer;
+                color: white;
+            }
+    
         </style>
     </head>
 
@@ -912,123 +1035,108 @@
         <div class="wrap">
             <div class="account-wrap">
                     <div class="tabs">
-                        <ul class="list">
-                            <li class="active">
-                                <a href="#tab1" class="btn">아이디 찾기</a>
-                            </li>
-
-                            <li style="cursor:pointer;">
-                                <a href="#tab2" class="btn">비밀번호 찾기</a>
-                            </li>
-                        </ul>
+                        <div class="tab_list tab_active" data-tabnum="0">
+                            <a href="#">아이디 찾기</a>
+                        </div>
+            
+                        <div class="tab_list" data-tabnum="1">
+                            <a href="#">비밀번호 찾기</a>
+                        </div>
                     </div> <!-- tabs fin -->
 
-                        <div class="find-content-info">
-                            <div id="tab1" class="cont active">
+                        <div class="tab_container">
+                            <div class="tab_content">
                                 <h3 class="title">아이디를 깜빡하셨나요?</h3>
                                 <p class="ment">가입 시 입력하신 정보로 아이디를 찾아보세요.</p>
                                 <form>
                                     <div class="find-content">
-                                        <ul class="form-list">
-                                            <li>
-                                                <div class="input-box must ">
-                                                    <label for="name" class="label">이름</label>
-                                                    <input type="email" name="name" value>
+                                                <div class="input-box">
+                                                    <input type="text" id="find_name" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">이름</span>
                                                 </div>
-                                            </li>
-            
-                                            <li>
-                                                <div class="input-box must ">
-                                                    <label for="email" class="label">이메일</label>
-                                                    <input type="email" name="email" value>
+                                            
+                                                <div class="input-box">
+                                                    <input type="email" id="find_email" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">이메일</span>
                                                 </div>
-                                            </li>
-                                        </ul>
                                     </div>
 
-                                    <div class="button">
-                                        <button class="submit">아이디 찾기</button>
+                                    <div class="submit">
+                                        <button class="findId active" type="button" disabled>아이디 찾기</button>
                                     </div>
                                 </form>
                             </div> <!-- tab1 fin -->
 
-                            <div id="tab2" class="cont">
-                                <p class="ment">가입한 아이디를 입력해주세요.</p>
+                            <div class="tab_content">
+                                <h3 class="title">비밀번호를 깜빡하셨나요?</h3>
+                                <p class="ment">새로운 비밀번호를 입력해주세요.</p>
 
                                 <form>
                                     <div class="find-content">
-                                        <ul class="form-list">
-                                            <li>
-                                                <div class="input-box must ">
-                                                    <label for="name" class="label">아이디</label>
-                                                    <input type="email" name="name" value>
+                                        
+                                                <div class="input-box">
+                                                    <input type="text" id="find_id" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">아이디</span>
                                                 </div>
-                                            </li>
-                                        </ul>
+                                            
+                                                <div class="input-box">
+                                                    <input type="password" id="find_pw" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">새로운 비밀번호</span>
+                                                </div>
+                                            
+                                                <div class="input-box">
+                                                    <input type="password" id="find_pwCheck" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">새로운 비밀번호 확인</span>
+                                                </div>
                                     </div>
-                                    <div class="button">
-                                        <a href="#tab3">다음</a>
+                                    <div class="submit">
+                                        <button class="findPw active" type="button" disabled>비밀번호 변경</button>
                                     </div>
                                 </form>
                             </div> <!-- tab2 fin -->
-
-                            <div id="tab3" class="cont">
-                                <p class="ment">변경할 비밀번호를 입력해주세요.</p>
-
-                                <form>
-                                    <div class="find-content">
-                                        <ul class="form-list">
-                                            <li>
-                                                <div class="input-box must ">
-                                                    <label for="password" class="label">새로운 비밀번호</label>
-                                                    <input type="password" name="password" value>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="input-box must ">
-                                                    <label for="password-check" class="label">새로운 비밀번호 확인</label>
-                                                    <input type="password" name="password-check" value>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="button">
-                                        <button class="submit">비밀번호 변경</button>
-                                    </div>
-                                </form>
-                            </div>
-                            
-
-                        </div> <!-- find-content-info fin -->
+                        </div> <!-- tab_container fin -->
                     
                 </div>
         </div>
 
         <script>
-            let tabList = document.querySelectorAll('.tabs .list li');
-            let contents = document.querySelectorAll(".tabs .find-content-info .cont");
-            let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
+            /********** tabs ***********/
+            
+            // .tab_list 의 a를 클릭했을 때 이벤트 걸어주기
+            let tabList = document.querySelectorAll('.tabs .tab_list');
+                // 유사배열은 forEach() 함수를 사용할 수 없다. 그래서 call이나 apply를 사용해야함
+                Array.prototype.forEach.call(tabList, function(list){
+                    // list의 첫 자식 = a 태그 클릭이벤트 걸어주기
+                    list.children[0].addEventListener('click',function(e) {
+                        
+                        e.preventDefault();
+                        let tabContent = document.querySelectorAll(".tab_container .tab_content");
+                        
+                        // .tab_list의 data-num 속성 값을 가져온다.
+                        let tabNum = this.parentElement.getAttribute('data-tabnum');
 
-            for(let i =0; i < tabList.length; i++) {
-                tabList[i].querySelector(".btn").addEventListener("click",function(e){
-                    e.preventDefault();
-                        for(let j=0; j<tabList.length; j++){
-                            // 나머지 버튼 클래스 제거
-                            tabList[j].classList.remove("active");
+                                Array.prototype.forEach.call(tabContent, function(cont,i){
+                                    // 나머지 .content 는 없애준다
+                                    cont.style.display = "none";
+                                    
+                                    tabList[i].className='tab_list'
+                                })
 
-                            //나머지 컨텐츠 display:none 처리
-                            contents[j].style.display = "none";
-                        }
+                        // .content 태그중에 tabNum과 동일한 인덱스 번호를 가진 태그를 보여준다.
+                        tabContent[tabNum].style.display = "block";
 
-                        // 버튼 관련 이벤트
-                        this.parentNode.classList.add("active");
-
-                        //버튼 클릭시 컨텐츠 전황
-                        activeCont = this.getAttribute("href");
-                        document.querySelector(activeCont).style.display = 'block';
+                            if(list.className.indexOf("tab_active") == -1){
+                                // 클릭한 tab_list에 tab_active 추가
+                                list.className = 'tab_list tab_active';
+                            }
+                        
+                    })
                 })
-            }
         </script>
 
         <!-- JAVASCRIPT -->

@@ -30,6 +30,10 @@ let url = window.location.href;
               except.push(url);
             }
 
+            if(url.includes("main") || url.includes("main2")){
+              except.push(url);
+            }
+
   window.onload = function(){
     let cookies = getCookie("login");
     //kakao login 추가
@@ -84,47 +88,66 @@ function enter(event){
 
 
 /*********************************로그인 페이지 login button disable 이벤트 */
-    if(document.getElementById('input-password')){
+    if(document.getElementById('input-password') || document.getElementById("input-email") ||
+      document.getElementById("find_email") || document.getElementById('find_pwCheck')){
       let pwInput = document.getElementById('input-password');
-      pwInput.addEventListener("input",loginBTN);
-  }
+      let signupBirth = document.getElementById("input-email");
+      let findEmail = document.getElementById("find_email");
+      let findPw = document.getElementById("find_pwCheck");
+      
+      if(pwInput){
+        pwInput.addEventListener("input",buttonOn);
+      }
 
-  if(document.getElementById("input-email")){
-    let signupBirth = document.getElementById("input-email");
-    signupBirth.addEventListener("input",signupBTN);
-  } 
+      else if(signupBirth) {
+        signupBirth.addEventListener("input",buttonOn);
+      }
+      
+      else if(findEmail) {
+        findEmail.addEventListener("input",buttonOn);
+      }
+      
+      else if(findPw) {
+        findPw.addEventListener("input",buttonOn);
+      }
+    }
+
+
     
-    function loginBTN(){
+    function buttonOn(){
       let pwInput = document.getElementById('input-password');
+      let signupBirth = document.getElementById("input-email");
+      let findEmail = document.getElementById("find_email");
+      let findPw = document.getElementById("find_pwCheck");
       let loginBtn = document.querySelector('.submit button');
       
       // 값이 입력 되면 class .focus 추가
-        if(pwInput.value != ""){
+        if(pwInput.value != "" || signupBirth.value != "" || findEmail.value != "" || findPw.value != ""){
           loginBtn.setAttribute("class","focus");
         }
 
       // 값이 없으면 button disabled , class 바꿔주기
-        if(pwInput.value == ""){
+        if(pwInput.value == "" || signupBirth.value == "" || findEmail.value == "" || findPw.value == ""){
           loginBtn.setAttribute("disabled","");
           loginBtn.removeAttribute("class","focus");
           loginBtn.setAttribute("class","active")
         }
     }
 
-    function signupBTN(){
-      let signupBirth = document.getElementById("input-birth");
-      let signupBtn = document.querySelector('.submit button');
+    // function signupBTN(){
+    //   let signupBirth = document.getElementById("input-birth");
+    //   let signupBtn = document.querySelector('.submit button');
       
-      if(signupBirth != ""){
-        signupBtn.setAttribute("class","focus");
-      }
+    //   if(signupBirth != ""){
+    //     signupBtn.setAttribute("class","focus");
+    //   }
 
-      if(signupBirth == ""){
-        signupBtn.setAttribute("disabled","");
-        signupBtn.removeAttribute("class","focus");
-        signupBtn.setAttribute("class","active")
-      }
-    }
+    //   if(signupBirth == ""){
+    //     signupBtn.setAttribute("disabled","");
+    //     signupBtn.removeAttribute("class","focus");
+    //     signupBtn.setAttribute("class","active")
+    //   }
+    // }
 
 
     /*************************************** 핸드폰 번호 실시간 하이픈 추가 */

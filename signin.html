@@ -1345,22 +1345,26 @@
         <script>
         // 아이디 저장하기 쿠키에 아이디 값이 있으면, id input에 출력
         let keepID = getCookie("keepID");
-            console.log(keepID)
+        let id = document.getElementById("input-id");
+            
             if(keepID){
-            let id = document.getElementById("input-email");
-            id.value = keepID;
+                id.value = keepID;
             }
         
-        /********** parameter 가져오기 ******/
+         /********** parameter 가져오기 ******/
             let urlStr = location.href;
             let loginUrl = new URL(urlStr);
             let urlParams = loginUrl.searchParams;
             console.log(urlParams)
             let idValue = urlParams.get('id');
             console.log(idValue)
-
-            // id값 로그인창에 미리 뿌려주기
-            document.getElementById('input-id').value = idValue;
+                
+             // parameter 값이 있으면, id값 로그인창에 미리 뿌려주기
+                if(idValue){
+                    document.getElementById('input-id').value = idValue;
+                }
+            
+            
         </script>
 
 <!-- kakao login -->
@@ -1402,8 +1406,8 @@
             gender = "";
             
             if(typeof kakao_account != 'undefined'){
-                if(JSON.parse(localStorage.getItem("kakaoID"))){
-                    let kakao = JSON.parse(localStorage.getItem("kakaoID"));
+                if(JSON.parse(localStorage.getItem("kakao"))){
+                    let kakao = JSON.parse(localStorage.getItem("kakao"));
                     kakao.push({ 
                         id : result.id,
                         name : profile.nickname,
@@ -1411,9 +1415,10 @@
                         birthday : kakao_account.birthday,
                     });
 
-                    localStorage.setItem("kakaoID",JSON.stringify(kakao));
+                    localStorage.setItem("kakao",JSON.stringify(kakao));
+                    setCookie('login',profile.nickname,{secure: true, 'max-age': 1200});
                     alert("로그인 성공");
-                    location.href = "/main2.html";
+                    location.href = `/main2.html?name=${profile.nickname}`;
                 }else {  // 회원정보가 없으면
                     let tem = [{
                         id : result.id,
@@ -1422,9 +1427,10 @@
                         birthday : kakao_account.birthday,
                     }]
                     // kakao 회원정보 따로 storage에 저장
-                    localStorage.setItem("kakaoID",JSON.stringify(tem));
+                    localStorage.setItem("kakao",JSON.stringify(tem));
+                    setCookie('login',profile.nickname,{secure: true, 'max-age': 1200});
                     alert("로그인 성공");
-                    location.href = "/main2.html";
+                    location.href = `/main2.html?name=${profile.nickname}`;
                 }
                 }
                 

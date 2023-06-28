@@ -543,6 +543,7 @@
                 font-weight: 400;
                 letter-spacing: -1px;
                 color:rgb(68,68,68);
+                display: block;
             }
 
             .liahhj > h2 > p{
@@ -552,6 +553,7 @@
             }
 
             .khzwyP {
+                display:inline-block;
                 margin-right: 6px;
                 font-family: inherit;
                 color:rgb(42,193,188);
@@ -1432,11 +1434,12 @@
                     </div>
 
                     <div class="iFeRkU"></div> <!-- 검색 눌렀을 때 바탕 어둡게  -->
+
                         <div class="kakfyC"> <!-- side 메뉴 버튼  -->
                             <div class="gdtYNR" style = "right : -380px">
                                 <header class="liahhj">
                                     <h2>
-                                        <span class="khzwyP"></span>님
+                                        <p class="khzwyP"></p>님
                                         <p>나이스 투 미츄!</p>
                                     </h2>
 
@@ -2201,28 +2204,30 @@
     });
 
 </script>
-<script>
-    if(JSON.parse(localStorage.getItem("members"))){
-        let loginId = JSON.parse(localStorage.getItem("members"))
-        let nickname = document.querySelector(".khzwyP");
-        console.log(nickname)
-        for(let i=0; i <loginId.length ; i ++) {
-        console.log(loginId[i].name)
-        nickname.innerText = `${loginId[i].name}`;
-        }
 
-    }
+            <!-- JAVASCRIPT -->
+            <script src="main.js"></script>
+            <script src="util.js"></script>
+            <script src="session.js"></script>
+            <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/libs/metismenujs/metismenujs.min.js"></script>
+            <script src="assets/libs/simplebar/simplebar.min.js"></script>
+            <script src="assets/libs/feather-icons/feather.min.js"></script>
+            
+<script>
+
+            let loginCookie = getCookie("login");
+            let name = document.querySelector('.khzwyP');
+            console.log(name.value);
+                if(loginCookie){
+                    debugger;
+                    name.innerText = loginCookie;
+                    console.log(name.value);
+                }
 </script>
     
 
-        <!-- JAVASCRIPT -->
-        <script src="main.js"></script>
-        <script src="util.js"></script>
-        <script src="session.js"></script>
-        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenujs/metismenujs.min.js"></script>
-        <script src="assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="assets/libs/feather-icons/feather.min.js"></script>
+    
         
 
 </body>
