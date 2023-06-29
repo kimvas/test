@@ -88,49 +88,60 @@ function enter(event){
 
 
 /*********************************로그인 페이지 login button disable 이벤트 */
-    if(document.getElementById('input-password') || document.getElementById("input-email") ||
-      document.getElementById("find_email") || document.getElementById('find_pwCheck')){
-      let pwInput = document.getElementById('input-password');
-      let signupBirth = document.getElementById("input-email");
-      let findEmail = document.getElementById("find_email");
-      let findPw = document.getElementById("find_pwCheck");
-      
-      if(pwInput){
-        pwInput.addEventListener("input",buttonOn);
-      }
-
-      else if(signupBirth) {
-        signupBirth.addEventListener("input",buttonOn);
-      }
-      
-      else if(findEmail) {
-        findEmail.addEventListener("input",buttonOn);
-      }
-      
-      else if(findPw) {
-        findPw.addEventListener("input",buttonOn);
-      }
-    }
-
-
     
-    function buttonOn(){
+    function buttonOn(event){
+      console.log("버튼온")
+      console.log(event.target)
       let pwInput = document.getElementById('input-password');
-      let signupBirth = document.getElementById("input-email");
+      let signupEmail = document.getElementById("input-email");
       let findEmail = document.getElementById("find_email");
       let findPw = document.getElementById("find_pwCheck");
       let loginBtn = document.querySelector('.submit button');
+      let findPwBtn = document.querySelector('.submitPw button')
       
       // 값이 입력 되면 class .focus 추가
-        if(pwInput.value != "" || signupBirth.value != "" || findEmail.value != "" || findPw.value != ""){
-          loginBtn.setAttribute("class","focus");
+        if(event.target == pwInput){
+          if(pwInput.value != ""){
+            loginBtn.setAttribute("class","focus");
+            loginBtn.setAttribute("disabled",false);
+          }else{
+            loginBtn.setAttribute("disabled","");
+            loginBtn.removeAttribute("class","focus");
+            loginBtn.setAttribute("class","active")
+          }
+        }
+      
+        if(event.target == signupEmail){
+          if(signupEmail.value != ""){
+            loginBtn.setAttribute("class","focus");
+            loginBtn.setAttribute("disabled",false);
+          }else {
+            loginBtn.setAttribute("disabled","");
+            loginBtn.removeAttribute("class","focus");
+            loginBtn.setAttribute("class","active")
+          }
         }
 
-      // 값이 없으면 button disabled , class 바꿔주기
-        if(pwInput.value == "" || signupBirth.value == "" || findEmail.value == "" || findPw.value == ""){
-          loginBtn.setAttribute("disabled","");
-          loginBtn.removeAttribute("class","focus");
-          loginBtn.setAttribute("class","active")
+        if(event.target == findEmail){
+          if(findEmail.value != ""){
+            loginBtn.setAttribute("class","focus");
+            loginBtn.setAttribute("disabled",false);
+          }else {
+            loginBtn.setAttribute("disabled","");
+            loginBtn.removeAttribute("class","focus");
+            loginBtn.setAttribute("class","active")
+          }
+        }
+
+        if(event.target == findPw){
+          if(findPw.value != ""){
+            findPwBtn.setAttribute("class","focus");
+            findPwBtn.setAttribute("disabled",false);
+          }else {
+            findPwBtn.setAttribute("disabled","");
+            findPwBtn.removeAttribute("class","focus");
+            findPwBtn.setAttribute("class","active")
+          }
         }
     }
 

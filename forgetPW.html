@@ -929,6 +929,33 @@
                 cursor: pointer;
                 color: white;
             }
+
+            /* button */
+        .submitPw {
+                width : 400px;
+                height : 80px;
+                line-height:50px;
+                margin-top : 0px;
+            }
+
+            .submitPw .active {
+                width : 100%;
+                height : 65px;
+                border-radius: 7px;
+                background : #ddd;
+                border: none;
+                cursor: pointer;
+            }
+
+            .submitPw .focus {
+                width : 100%;
+                height : 65px;
+                border-radius: 7px;
+                background : #2AC1BC;
+                border: none;
+                cursor: pointer;
+                color: white;
+            }
     
         </style>
     </head>
@@ -1057,7 +1084,7 @@
                                                 </div>
                                             
                                                 <div class="input-box">
-                                                    <input type="email" id="find_email" required="required">
+                                                    <input type="email" id="find_email" required="required" oninput="buttonOn(event)">
                                                     <span class="required"></span>
                                                     <span class="label">이메일</span>
                                                 </div>
@@ -1089,12 +1116,12 @@
                                                 </div>
                                             
                                                 <div class="input-box">
-                                                    <input type="password" id="find_pwCheck" required="required">
+                                                    <input type="password" id="find_pwCheck" required="required" oninput="buttonOn(event)">
                                                     <span class="required"></span>
                                                     <span class="label">새로운 비밀번호 확인</span>
                                                 </div>
                                     </div>
-                                    <div class="submit">
+                                    <div class="submitPw">
                                         <button class="findPw active" type="button" disabled>비밀번호 변경</button>
                                     </div>
                                 </form>
