@@ -773,18 +773,18 @@
             display: flex;
         }
 
-        .tab_list{
+        .tabs .tab_list{
             width : 200px;
             height : 100%;
             text-align: center;
             box-sizing: border-box;
         }
 
-        .tab_active {
+        .tabs .tab_active {
             border-bottom: 1px solid black;
         }
 
-        .tab_list a{
+        .tabs .tab_list a{
             display:block;
             width: 100%;
             height: 100%;
@@ -1084,14 +1084,14 @@
                                                 </div>
                                             
                                                 <div class="input-box">
-                                                    <input type="email" id="find_email" required="required" oninput="buttonOn(event)">
+                                                    <input type="email" id="find_email" required="required" oninput="buttonOn(event)" onkeydown="enter(event)">
                                                     <span class="required"></span>
                                                     <span class="label">이메일</span>
                                                 </div>
                                     </div>
 
                                     <div class="submit">
-                                        <button class="findId active" type="button" disabled>아이디 찾기</button>
+                                        <button class="findId active" type="button" onclick="findId()">아이디 찾기</button>
                                     </div>
                                 </form>
                             </div> <!-- tab1 fin -->
@@ -1132,6 +1132,29 @@
         </div>
 
         <script>
+            // /********** parameter 가져오기 ******/
+            let urlStr = location.href;
+            let loginUrl = new URL(urlStr);
+            let urlParams = loginUrl.searchParams;
+            console.log(urlParams)
+            let value = urlParams.get('key');
+            console.log(value)
+                
+             // pw를 누르면 pw 페이지 보여주기
+                let tabs = document.querySelectorAll('.tabs .tab_list');
+                let tabContent = document.querySelectorAll(".tab_container .tab_content");
+                    if(value == "pw") {
+                        tabs[1].className = 'tab_list tab_active'
+                        tabs[0].className = 'tab_list'
+
+                        tabContent[1].style.display = "block";
+                        tabContent[0].style.display = "none";
+                    }
+
+
+
+
+
             /********** tabs ***********/
             
             // .tab_list 의 a를 클릭했을 때 이벤트 걸어주기

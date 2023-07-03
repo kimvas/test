@@ -34,6 +34,10 @@ let url = window.location.href;
               except.push(url);
             }
 
+            if(url.includes("forgetPW")){
+              except.push(url);
+            }
+
   window.onload = function(){
     let cookies = getCookie("login");
     //kakao login 추가
@@ -55,6 +59,7 @@ function enter(event){
   let modiInput = document.getElementById("floatingPasswordCheck");
   let forget = document.getElementById("input-confirmpassword");
   let signupEmail = document.getElementById("input-email");
+  let findIdemail = document.getElementById('find_email');
 
     if(event.keyCode === 13){
       console.log("엔터눌렀다")
@@ -66,6 +71,8 @@ function enter(event){
         forgetPw(event);
       }else if(event.target == signupEmail){
         submit(event);
+      }else if(event.target == findIdemail) {
+        findId();
       }
       
     }
@@ -126,6 +133,7 @@ function enter(event){
           if(findEmail.value != ""){
             loginBtn.setAttribute("class","focus");
             loginBtn.setAttribute("disabled",false);
+        
           }else {
             loginBtn.setAttribute("disabled","");
             loginBtn.removeAttribute("class","focus");
@@ -145,22 +153,6 @@ function enter(event){
         }
     }
 
-    // function signupBTN(){
-    //   let signupBirth = document.getElementById("input-birth");
-    //   let signupBtn = document.querySelector('.submit button');
-      
-    //   if(signupBirth != ""){
-    //     signupBtn.setAttribute("class","focus");
-    //   }
-
-    //   if(signupBirth == ""){
-    //     signupBtn.setAttribute("disabled","");
-    //     signupBtn.removeAttribute("class","focus");
-    //     signupBtn.setAttribute("class","active")
-    //   }
-    // }
-
-
     /*************************************** 핸드폰 번호 실시간 하이픈 추가 */
         
         // 휴대폰 번호 입력 필드의 값을 모니터링하고 실시간으로 하이픈을 추가합니다.
@@ -178,7 +170,7 @@ function enter(event){
 
 /*********************** main page 검색 눌렀을 때 */
   function search_bar() {
-    console.log("눌럿다")
+    
     // 각 class name 변경해주기
     let search_bar = document.querySelector(".gzRefZ");
     search_bar.className = "ksrLg";
@@ -350,6 +342,7 @@ function enter(event){
 
 /**********************  회원가입 */ 
 function submit() {
+    console.log("뭐야")
     let checked = valid();
     
     // 검증 완료
@@ -542,7 +535,7 @@ function signIn(){
   Object.keys(localStorage).forEach(key => {
     
       if(key == "members"){
-        let value = JSON.parse(localStorage.getItem(key));
+        let value =JSON.parse(localStorage.getItem(key));
           for(let i =0; i <value.length ; i++) {
           // id가 같은지 확인
           if(value[i].id == id.value) {
@@ -625,6 +618,34 @@ function logout(){
   location.href = "/main.html";
 }
 
+/******** 아이디찾기 버튼에 이벤트 걸어주기 */
+  let findidBtn = document.querySelector(".findId");
+    findidBtn.addEventListener("click",findId);
+
+
+/****************************** 아이디 찾기 */
+function findId(){
+  let findId = document.getElementById("find_name");
+  let findEmail = document.getElementById("find_email");
+debugger;
+  Object.keys(localStorage).forEach(key => {
+      if(key == "members"){
+        let value =JSON.parse(localStorage.getItem(key));
+
+              for(let i=0; i<value.length; i++) {
+                  if(value[i].id == findId.value){
+                    if(value[i].email == findEmail.value){
+                      alert(`아이디는 ${value[i].id} 입니다.`);
+                    }else {
+                      alert("이메일이 일치하지 않습니다.")
+                    }
+                  }else {
+                    alert("없는 이름 입니다.")
+                  }
+              }
+          }
+    })
+}
 
 /*************************** 비밀번호 찾기 */
 function forgetPw(){
