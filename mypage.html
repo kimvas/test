@@ -869,57 +869,73 @@
             width : 720px;
         }
 
-        .my-title {
-            margin-bottom : 30px;
-            font-size: 24px;
-            line-height : 29px;
+        .my-welcome {
+            min-height : 240px;
+            padding : 40px;
+            font-family: BM-HANNA-11yrs-old;
+            font-size: 40px;
+            color : #444;
+            font-weight : 400;
+            line-height: 41px;
+            background-color:#f9f9f9;
+            border-radius: 6px;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .my-info-header{
-            margin-top :70px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #ddd;
-            display : flex;
+        .search-list.mypage {
+            width : 100%;
+            margin-top : 70px;
         }
 
-        .my-info-header:first-of-type {
-            margin-top: 0;
+        .search-list {
+            position :relative;
+            width: calc(100% + 16px);
+            margin-top : 40px;
         }
 
-        .my-info-header .name {
-            font-size: 20px;
-            line-height: 24px;
-            font-weight: 700;
-            padding-right: 5px;
+        .search-list.mypage .title-search {
+            padding-bottom :16px;
+            font-size:20px;
+            line-height:24px;
         }
 
-        .my-info-header .name b {
-            color : #2AC1BC;
+        .search-list.mypage .b-list {
+            padding:30px 0;
+            border-top: 1px solid #ddd;
+            border-bottom : 1px solid #ddd;
+            flex-wrap: nowrap;
+            overflow: hidden;
         }
 
-        .my-info-header .btn {
-            margin-left: auto;
-            display : flex;
+        .search-list .data-none {
+            padding : 120px 0;
         }
 
-        .my-info-header .btn .bt-text {
-            margin-left: 12px;
-            font-size: 14px;
-        }
-
-        .bt-text.arr {
-            font-size: 16px;
-            color :#000;
-            line-height: 16px;
-            text-decoration: none;
-        }
-
-        .bt-text {
-            font-weight: 400;
-            white-space: nowrap;
+        .data-none {
+            width : 100%;
+            padding : 100px 0;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
+
+        .data-none .title {
+            font-family : 'BM-HANNA-11yrs-old', sans-serif;
+            font-size : 54px;
+            font-weight: 400;
+            letter-spacing: -1px;
+            line-height: 60px;
+        }
+
+        .data-none .text {
+            margin-top:20px;
+            font-size: 18px;
+            line-height: 27px;
+        }
+
 
 
     /************footer**************/
@@ -1190,7 +1206,7 @@
                                             <div class="menu-box">
                                                 <h4>회원 정보</h4>
                                                 <ul>
-                                                    <li><a href="">회원정보 변경</a></li>
+                                                    <li><a href="./usermodify.html">회원정보 변경</a></li>
                                                     <li><a href="">배송지 관리</a></li>
                                                 </ul>
                                             </div>
@@ -1204,72 +1220,22 @@
                                             </div>
                                         </div>
 
-                                        <section class="my-container member-modify">
-                                            <h3 class="my-title">회원정보 변경</h3>
+                                        <section class="my-container">
+                                            <h4 class="my-welcome">반가워요,
+                                                <p class="name">
+                                                    <b></b> 님
+                                                </p>
+                                            </h4>
 
-                                            <div class="my-info-header">
-                                                <h4 class="name">
-                                                    <b>김혜림님</b>의 회원정보
-                                                </h4>
-
-                                                <div class="btn">
-                                                    <button class="bt-text arr">비밀번호 면경</button>
-                                                    <button class="sc-khIimk gNMCgZ bt-text arr">회원탈퇴</button>
-                                                </div>
-                                            </div>
-
-                                            <div class="my-content">
-                                                <div class="member-info">
-                                                    <div class="member-info-box">
-                                                        <dl>
-                                                            <dt>아이디</dt>
-                                                            <dt>hyelim91</dt>
-                                                        </dl>
-                                                    </div>
-                                                    <div class="member-info-box">
-                                                        <dl>
-                                                            <dt>이름</dt>
-                                                            <dt>김혜림</dt>
-                                                        </dl>
-                                                    </div>
-                                                    <div class="member-info-box">
-                                                        <dl>
-                                                            <dt>휴대폰 번호</dt>
-                                                            <dt>010-2866-4146</dt>
-                                                        </dl>
+                                            <section class="search-list mypage">
+                                                <h3 class="title-search">최근 본 상품</h3>
+                                                <div class="b-list cols">
+                                                    <div class="data-none">
+                                                        <h2 class="title">텅</h2>
+                                                        <p class="text">최근 본 상품이 없어요.</p>
                                                     </div>
                                                 </div>
-
-                                                <p class="cautions-dotted">이름,휴대폰번호는 본인인증을 통해 변경 가능합니다.</p>
-
-                                                <ul class="form-list large">
-                                                    <li>
-                                                        <div class="input-box active must">
-                                                            <span class="inform">이메일 (예: store@baemin.com)</span>
-                                                            <label for="@email" class="label">이메일</label>
-                                                            <input type="email" id="@email" name="email">
-                                                        </div>
-                                                        <p class="cautions-dotted">아이디/비밀번호 찾기에 활용되므로 정확하게 입력해주세요.</p>
-                                                    </li>
-
-                                                    <li>
-                                                        <div class="input-box active">
-                                                            <span class="inform">생년월일 숫자 8자리 (예: 2000-12-31)</span>
-                                                            <label for="@birthday" class="label">생일정보</label>
-                                                            <input type="text" id="@birthday" name="birthday">
-
-                                                            <ul class="cautions-dotted">
-                                                                <li>생일을 정확하게 입력해주세요.</li>
-                                                                <li>만 14세 이상만 회원가입이 가능합니다.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="btn-group">
-                                                <button class="bt-base disabled">저장하기</button>
-                                            </div>
+                                            </section>
                                         </section>
                                     </div>
                                                         

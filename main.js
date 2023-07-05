@@ -22,6 +22,8 @@ let except = ["http://127.0.0.1:5500/main.html", // 메인
               "http://127.0.0.1:5500/signin.html", // 로그인 페이지
               "http://127.0.0.1:5500/signup.html", // 회원가입 페이지
               "http://127.0.0.1:5500/forgetPW.html", // 비밀번호 찾기 페이지
+              "http://127.0.0.1:5500/mypage.html", // 마이 페이지
+              "http://127.0.0.1:5500/usermodify.html", // 회원수정 페이지
             ];
 
 /*******************현재 페이지를 확인해서 except에 넣어주기 */
@@ -551,7 +553,7 @@ function signIn(){
                 // for문 끝내기위해 true
                   loginCheck = true;
                   // 쿠키 등록
-                  setCookie('login',value.id,{secure: true, 'max-age': 1200});
+                  setCookie('login',value[i].userName,{secure: true, 'max-age': 1200});
                   alert('로그인 성공');
 
                   // 메인페이지로 이동
