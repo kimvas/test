@@ -62,6 +62,7 @@ function enter(event){
   let forget = document.getElementById("input-confirmpassword");
   let signupEmail = document.getElementById("input-email");
   let findIdemail = document.getElementById('find_email');
+  let findPw = document.getElementById('find_pwCheck');
 
     if(event.keyCode === 13){
       console.log("엔터눌렀다")
@@ -75,6 +76,8 @@ function enter(event){
         submit(event);
       }else if(event.target == findIdemail) {
         findId();
+      }else if(event.target == findPw){
+        forgetPw();
       }
       
     }
@@ -537,6 +540,7 @@ function signIn(){
   Object.keys(localStorage).forEach(key => {
     
       if(key == "members"){
+        debugger;
         let value =JSON.parse(localStorage.getItem(key));
           for(let i =0; i <value.length ; i++) {
           // id가 같은지 확인
@@ -621,81 +625,85 @@ function logout(){
 }
 
 /******** 아이디찾기 버튼에 이벤트 걸어주기 */
-  let findidBtn = document.querySelector(".findId");
+  if(document.getElementById("findId")){
+    let findidBtn = document.getElementById("findId");
+    console.log(findidBtn);
     findidBtn.addEventListener("click",findId);
-
-
+  }
+  
 /****************************** 아이디 찾기 */
-function findId(){
-  let findId = document.getElementById("find_name");
-  let findEmail = document.getElementById("find_email");
-debugger;
-  Object.keys(localStorage).forEach(key => {
-      if(key == "members"){
-        let value =JSON.parse(localStorage.getItem(key));
+function findId() {
+  let findName = document.getElementById("find_name").value;
+  let findEmail = document.getElementById("find_email").value;
 
-              for(let i=0; i<value.length; i++) {
-                  if(value[i].id == findId.value){
-                    if(value[i].email == findEmail.value){
-                      alert(`아이디는 ${value[i].id} 입니다.`);
-                    }else {
-                      alert("이메일이 일치하지 않습니다.")
-                    }
-                  }else {
-                    alert("없는 이름 입니다.")
-                  }
-              }
+  Object.keys(localStorage).forEach(key => {
+    if (key === "members") {
+      let value = JSON.parse(localStorage.getItem(key));
+    
+      let found = false;
+
+      for (let i = 0; i < value.length; i++) {
+        if (value[i].userName === findName) {
+          found = true;
+          if (value[i].email === findEmail) {
+            alert(`아이디는 ${value[i].id} 입니다.`);
+          } else {
+            alert("이메일이 일치하지 않습니다.");
           }
-    })
+          break;
+        }
+      }
+
+      if (!found) {
+        alert("없는 이름입니다.");
+      }
+    }
+  });
 }
+
 
 /*************************** 비밀번호 찾기 */
 function forgetPw(){
-  let getId = getCookie("keepID");
-  let newPw = document.getElementById("input-newpassword");
-  let pwCheck = document.getElementById("input-confirmpassword");
+  
+  let beforeId = document.getElementById('find_id');
+  let newPw = document.getElementById("find_pw");
+  let pwCheck = document.getElementById("find_pwCheck");
 
+   // 비밀번호 형식이 맞는지 확인
+  if(!password.test(newPw.value)){
+    alert("영문 숫자 특수기호 조합 8자리 이상 입력해주세요");
+    newPw.value = "";
+    newPw.focus();
+  }
 
-    // 비밀번호 형식이 맞는지 확인
-    if(!password.test(newPw.value)){
-      alert("영문 숫자 특수기호 조합 8자리 이상 입력해주세요");
-      newPw.value = "";
-      newPw.focus();
-    }
+   if (newPw.value != pwCheck.value){ // 두개의 값이 같은지 확인 
+    alert("비밀번호가 일치하지 않습니다");
+    pwCheck.value = "";
+    pwCheck.focus();
+  } else {
+  Object.keys(localStorage).forEach(key => {
+      if(key == "members"){
+        let value = JSON.parse(localStorage.getItem(key));
+        debugger;
+        for(let i=0; i <value.length; i++) {
+          if(value[i].id == beforeId.value) {
+            let members = {
+              id : beforeId.value,
+              userName:value[i].userName,
+              pw :newPw.value,
+              email : value[i].email,
+              phone : value[i].phone,
+              birth : value[i].birth,
+              }
 
-     if (newPw.value != pwCheck.value){ // 두개의 값이 같은지 확인 
-      alert("비밀번호가 일치하지 않습니다");
-      pwCheck.value = "";
-      pwCheck.focus();
-    }else{
-
-          Object.keys(sessionStorage).forEach((key) => {
-                  if(key.includes("members")){
-                    let value = JSON.parse(sessionStorage.getItem(key));
-                  
-                    // 새로 입력한 비밀번호와 원래 비밀번호가 같으면
-                      if(newPw.value == value.pw){
-                        console.log(newPw.value , value.pw)
-                        alert("이미 사용한 비밀번호입니다.");
-                        newPw.value = "";
-                        pwCheck.value = "";
-                        newPw.focus();
-                        return;
-                      }
-
-                      // 저장해논 아이디와 세션에 저장된 아이디가 같으면 값 변경
-                      if(value.id == getId){
-                        let members = {id : getId,
-                                        name:value.name,
-                                        pw :newPw.value,
-                                        role : "user",
-                                        }
-                                      
-                        sessionStorage.setItem(key,JSON.stringify(members));
-                        alert("비밀번호가 변경되었습니다");
-                        location.href = "signin.html"
-                      }
-                  }
-          })
-    }
+              value.push(members);
+              members.splice(i,1)
+              alert("비밀번호가 변경되었습니다");
+              break;
+          }
+        }
+      }
+  })
+  }
+  
 }

@@ -815,6 +815,14 @@
                 letter-spacing: 0.1em;
             }
 
+            .form .input-box:nth-of-type(8) input:focus ~.label
+            {
+                transform: translateX(-5px) translateY(-10px);
+                font-size : 0.5em;
+                letter-spacing: 0.1em;
+            }
+
+
             .form .input-box input:focus {
                 border: 1px solid #2AC1BC;
             }
@@ -825,6 +833,19 @@
                 padding: 18px;
                 pointer-events: none;
                 font-size : 0.9rem;
+                transition: 0.5s;
+                letter-spacing: 0.05em;
+                color : #ddd;
+            }
+
+            
+            .form .input-box:nth-of-type(8) .label{
+                position: absolute;
+                left : 10px;
+                top: 15px;
+                padding: 18px;
+                pointer-events: none;
+                font-size : 1rem;
                 transition: 0.5s;
                 letter-spacing: 0.05em;
                 color : #ddd;
@@ -1181,13 +1202,13 @@
             </div>
 
             <div class="input-box">
-                <input type="text" id="input-name">
+                <input type="text" id="input-name" required="required">
                 <span class="required"></span>
                 <span class="label">이름</span>
             </div>
 
             <div class="input-box">
-                <input type="text" id="input-phone">
+                <input type="text" id="input-phone" required="required">
                 <span class="required"></span>
                 <span class="label">휴대폰 번호</span>
             </div>

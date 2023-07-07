@@ -69,6 +69,15 @@
             font-weight:bold;
         }
 
+        
+        button {
+            margin-bottom : 0;
+            background: none;
+            border : none;
+            outline : none !important;
+            cursor: pointer;
+        }
+
         #root{
             height: 100%;
         }
@@ -1044,7 +1053,7 @@
             font-size : 13px;
             color : #000;
             line-height : 16px;
-            background : linear-gradient(to top, rgba(42,193,188,0.7) 25% transparent 0%);
+            background : linear-gradient(to top, rgba(42,193,188,0.7) 25%, transparent 0%);
             transform : translateY(-50%);
             display: block;
             content :"필수";
@@ -1061,7 +1070,7 @@
             transition:.2s ease opacity, .2s ease top;
         }
 
-        .input-box.active .inform {
+        .input-box .active .inform {
             opacity : 0;
             z-index: -1;
             top : 14px;
@@ -1079,7 +1088,7 @@
             color : #ccc;
         }
 
-        .input-box.active .label {
+        .input-box .active .label {
             opacity: 1;
             z-index : 1;
             top: 14px;
@@ -1097,13 +1106,27 @@
             transition : .2s ease padding, .3s ease border;
         }
         
-        .input-box.must input {
+        .input-box .must input {
             padding-right : 60px !important;
         }
 
-        .input-box.fous input, .input-box.active input {
+        .input-box.focus input, .input-box.active input {
             padding : 31px 20px 14px 20px;
         }
+
+        .input-box input:focus{
+            border : 1px solid #2AC1BC;
+        }
+
+        /* focus 됐을 때, span 위치 바꾸기 */
+        .input-box input:valid ~ .label,
+        .input-box input:focus ~ .label
+            {
+                transform: translateX(-5px) translateY(-10px);
+                font-size : 0.5em;
+                letter-spacing: 0.1em;
+            }
+
 
         ul[class^="cautions"] li {
             position: relative;
@@ -1130,17 +1153,86 @@
             margin-top : 0;
         }
 
+        .text-valid {
+            height : 0;
+            font-size: 12px;
+            color : #2AC1BC;
+            line-height: 16px;
+            opacity: 0;
+            word-break : flex-start ;
+            align-items: hidden;
+            transition : .4s ease height, .3s ease opacity;
+        }
+
+        .text-valid::before {
+            width : 16px;
+            height : 16px;
+            margin-right : 4px;
+            display: inline-block;
+            content : '';
+        }
+
+        .text-valid.show {
+            height : auto;
+            margin-top:8px;
+            opacity : 1;
+            display : inline-flex;
+        }
+
+
         .member-modify .btn-group {
             width : 400px;
         }
 
-        .btnn-group {
+        .btn-group {
             margin-top:50px;
             display : flex;
             justify-content: center;
         }
 
-        
+        .bt-base {
+            position : relative;
+            white-space: nowrap;
+            display:inline-flex;
+            justify-content: center;
+            align-items: center;
+            border : 1px solid #2AC1BC;
+            transition : .3s ease color, .3s ease background-color, .3s ease border-color;
+        }
+
+        .bt-base {
+            width : 100%;
+            height : 62px;
+            font-size: 16px;
+            line-height: 19px;
+            color : #fff;
+            background-color : #2AC1BC;
+            border-radius: 6px;
+        }
+
+        .bt-base {
+            font-weight: 500;
+        }
+
+        .btn-group .bt-base {
+            margin-left: 10px;
+        }
+
+        .my-container .bt-base {
+            max-width : 400px;
+        }
+
+        .bt-base.disabled {
+            color : #ccc;
+            background-color : #eee;
+            border-color : #eee;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .btn-group .bt-base:first-child {
+            margin-left: 0;
+        }
 
     /************footer**************/
         .moonbanggu-footer {
@@ -1433,7 +1525,7 @@
                                                 </h4>
 
                                                 <div class="btn">
-                                                    <button class="bt-text arr">비밀번호 면경</button>
+                                                    <button class="bt-text arr">비밀번호 변경</button>
                                                     <button class="sc-khIimk gNMCgZ bt-text arr">회원탈퇴</button>
                                                 </div>
                                             </div>
@@ -1466,9 +1558,9 @@
                                                 <ul class="form-list large">
                                                     <li>
                                                         <div class="input-box active must">
+                                                            <input type="email" id="@email" name="email" required>
                                                             <span class="inform">이메일 (예: store@baemin.com)</span>
                                                             <label for="@email" class="label">이메일</label>
-                                                            <input type="email" id="@email" name="email">
                                                         </div>
                                                         <p class="cautions-dotted">아이디/비밀번호 찾기에 활용되므로 정확하게 입력해주세요.</p>
                                                     </li>
