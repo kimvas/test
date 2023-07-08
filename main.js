@@ -63,6 +63,7 @@ function enter(event){
   let signupEmail = document.getElementById("input-email");
   let findIdemail = document.getElementById('find_email');
   let findPw = document.getElementById('find_pwCheck');
+  let modiEmail = document.getElementById('@email');
 
     if(event.keyCode === 13){
       console.log("엔터눌렀다")
@@ -78,6 +79,9 @@ function enter(event){
         findId();
       }else if(event.target == findPw){
         forgetPw();
+      }else if(event.target == modiEmail) {
+        debugger;
+        modify();
       }
       
     }
@@ -102,14 +106,18 @@ function enter(event){
 /*********************************로그인 페이지 login button disable 이벤트 */
     
     function buttonOn(event){
+      event.stopPropagation();
       console.log("버튼온")
       console.log(event.target)
+      
       let pwInput = document.getElementById('input-password');
       let signupEmail = document.getElementById("input-email");
       let findEmail = document.getElementById("find_email");
       let findPw = document.getElementById("find_pwCheck");
       let loginBtn = document.querySelector('.submit button');
-      let findPwBtn = document.querySelector('.submitPw button')
+      let findPwBtn = document.querySelector('.submitPw button');
+      let modiEmail = document.getElementById('@email');
+      let modiBtn = document.querySelector(".btn-group button");
       
       // 값이 입력 되면 class .focus 추가
         if(event.target == pwInput){
@@ -154,6 +162,17 @@ function enter(event){
             findPwBtn.setAttribute("disabled","");
             findPwBtn.removeAttribute("class","focus");
             findPwBtn.setAttribute("class","active")
+          }
+        }
+
+        if(event.target == modiEmail){
+          if(modiEmail.value != ""){
+            modiBtn.setAttribute("class","focus");
+            modiBtn.setAttribute("disabled",false);
+          }else {
+            modiBtn.setAttribute("disabled","");
+            modiBtn.removeAttribute("class","focus");
+            modiBtn.setAttribute("class","active")
           }
         }
     }
@@ -347,7 +366,7 @@ function enter(event){
 
 /**********************  회원가입 */ 
 function submit() {
-    console.log("뭐야")
+    
     let checked = valid();
     
     // 검증 완료
@@ -362,7 +381,7 @@ function submit() {
 
         Object.keys(localStorage).forEach((key) => {
           
-          if(key.includes("members")){ // members key값이 이미 있으면,
+          if(key == "members"){ // members key값이 이미 있으면,
             let member = JSON.parse(localStorage.getItem(key)); // key의 value 가져오기
             
                 for(let i=0; i<member.length; i++) { // value 값 가져오기
@@ -557,7 +576,7 @@ function signIn(){
                 // for문 끝내기위해 true
                   loginCheck = true;
                   // 쿠키 등록
-                  setCookie('login',value[i].userName,{secure: true, 'max-age': 1200});
+                  setCookie('login',value[i].userName,{secure: true, 'max-age': 6000});
                   alert('로그인 성공');
 
                   // 메인페이지로 이동
@@ -581,39 +600,84 @@ function signIn(){
   }
 }
 
-
+function getCookieId(){
+  let cookies = getCookie('keepID');
+    if(cookies){
+      return cookies;
+    }
+    return false;
+}
 
 /******************** 회원정보 수정 */
 
 function modify(){
-
-  //쿠키값 가져오기
-  let cookies = getCookie('login');
-  
-  //수정된 값들 가져오기
-  let id = cookies;
-  let name = document.getElementById('input-username');
-  let pw = document.getElementById('floatingPassword');
-  let pwCheck = document.getElementById('floatingPasswordCheck');
-  
-    let checked = valid();
-      if(checked){
-      // 쿠키값과 같은 id 찾아서 값 변경해주기
-        for(let i = 0; i < members.length ; i++) {
-          if(cookies == members[i].id){
-              members[i].name = name.value;
-              members[i].pw = pw.value;
-
-              // 수정된 값을 sessionStorage에 저장
-              let memberNum = board_N();
-              sessionStorage.setItem("members" + memberNum,JSON.stringify(members[i]))
-              alert("수정이 완료되었습니다.")
-              // 메인페이지2로 이동
-              location.href="/main2.html";
+  let email = document.getElementById('@email');
+  let phone = document.getElementById("@birthday")
+debugger;
+  // keepID 쿠키가 있으면,
+  let getId = getCookieId();
+    if(getId){
+      if(email.value != ""){
+            Object.keys(localStorage).forEach(key => {
+              if(key == "members"){
+                let value = JSON.parse(localStorage.getItem(key));
+                  for(let i=0; i <value.length ; i++) {
+                    if(value[i].id == getId){
+                      let member = {
+                        id : getId,
+                        userName: value[i].userName,
+                        pw :value[i].pw,
+                        email : email.value,
+                        phone : phone.value,
+                        birth : value[i].birth,
+                        }
+          
+                        value.push(member);
+                        value.splice(i,1)
+                        localStorage.setItem(key,JSON.stringify(value))
+                        alert("회원수정이 완료되었습니다");
+                        break;
+                        
+                    }
+                  }
+                  location.href = "./mypage.html";
+              }
+            })
+          
+      }
+    }else { // keepID가 없으면,
+      if(email.value != ""){
+        if(getCookie('login')){
+          let cookies = getCookie('login');
+            Object.keys(localStorage).forEach(key => {
+              if(key == "members"){
+                let value = JSON.parse(localStorage.getItem(key));
+                  for(let i=0; i <value.length ; i++) {
+                    if(value[i].userName == cookies){
+                      let member = {
+                        id : value[i].id,
+                        userName: cookies,
+                        pw :value[i].pw,
+                        email : email.value,
+                        phone : phone.value,
+                        birth : value[i].birth,
+                        }
+          
+                        value.push(member);
+                        value.splice(i,1)
+                        localStorage.setItem(key,JSON.stringify(value))
+                        alert("회원수정이 완료되었습니다");
+                        break;
+                        
+                    }
+                  }
+                  location.href = "./mypage.html";
+              }
+            })
           }
       }
     }
-  
+    
 }
 
 
@@ -626,20 +690,21 @@ function logout(){
 
 /******** 아이디찾기 버튼에 이벤트 걸어주기 */
   if(document.getElementById("findId")){
-    let findidBtn = document.getElementById("findId");
-    console.log(findidBtn);
-    findidBtn.addEventListener("click",findId);
+    let findIdBtn = document.getElementById("findId");
+    console.log(findIdBtn);
+    findIdBtn.addEventListener("click",findId);
   }
   
 /****************************** 아이디 찾기 */
-function findId() {
+function findId(event) {
+  
   let findName = document.getElementById("find_name").value;
   let findEmail = document.getElementById("find_email").value;
 
   Object.keys(localStorage).forEach(key => {
     if (key === "members") {
       let value = JSON.parse(localStorage.getItem(key));
-    
+    debugger;
       let found = false;
 
       for (let i = 0; i < value.length; i++) {
@@ -684,20 +749,21 @@ function forgetPw(){
   Object.keys(localStorage).forEach(key => {
       if(key == "members"){
         let value = JSON.parse(localStorage.getItem(key));
-        debugger;
+        
         for(let i=0; i <value.length; i++) {
           if(value[i].id == beforeId.value) {
-            let members = {
+            let member = [{
               id : beforeId.value,
               userName:value[i].userName,
               pw :newPw.value,
               email : value[i].email,
               phone : value[i].phone,
               birth : value[i].birth,
-              }
+              }]
 
-              value.push(members);
-              members.splice(i,1)
+              value.push(member);
+              value.splice(i,1)
+              localStorage.setItem(key,JSON.stringify(value))
               alert("비밀번호가 변경되었습니다");
               break;
           }
@@ -707,3 +773,96 @@ function forgetPw(){
   }
   
 }
+
+
+/******************************* 비밀번호 변경 */
+  function changePw() {
+    let nowPw = document.getElementById('now_password');
+    let newPw = document.getElementById('new_password');
+    let newCheckPw = document.getElementById('confirm_password');
+
+    Object.keys(localStorage).forEach(key => {
+        if(key == "members"){
+          let value = JSON.parse(localStorage.getItem(key));
+            for(let i=0; i <value.length; i++) {
+              if(value[i].pw == nowPw.value){
+                if(newPw.value == newCheckPw.value) {
+                    let member = {
+                      id: value[i].id,
+                      userName : value[i].userName,
+                      email : value[i].email,
+                      phone : value[i].phone,
+                      pw : newPw.value,
+                      birth : value[i].birth,
+                    }
+
+                    value.push(member);
+                    value.splice(i,1);
+                    localStorage.setItem(key,JSON.stringify(value));
+                    alert("비밀번호가 변경되었습니다.");
+
+                    break;
+
+                }
+              }
+            }
+            closeModal();
+        }
+    })
+  }
+
+
+  /********************** 회원탈퇴 */
+  function deleteMember() {
+      if(getCookie('login')){
+        let cookie = getCookie('login');
+          Object.keys(localStorage).forEach(key => {
+            if(key == "members"){
+              let value = JSON.parse(localStorage.getItem(key));
+
+              for(let i=0; i <value.length ; i++) {
+                if(cookie == value[i].userName){
+                    deleteCookie('login');
+                    value.splice(i,1);
+                    localStorage.setItem(key,value);
+                    
+                    break;
+                }
+              }
+              
+            }
+          })
+          alert("회원탈퇴 되었습니다.");
+          logout();
+          location.href = "main.html";
+      }
+
+      if(getCookie("keepID")){
+        let cookie = getCookie('keepID') 
+          Object.keys(localStorage).forEach(key => {
+            if(key == "members"){
+              let value = JSON.parse(localStorage.getItem(key));
+
+              for(let i=0; i <value.length ; i++) {
+                if(cookie == value[i].userName){
+                    deleteCookie('keepID');
+                    value.splice(i,1);
+                    localStorage.setItem(key,value);
+                    
+                    break;
+                }
+              }
+              
+            }
+          })
+          alert("회원탈퇴 되었습니다.");
+          logout();
+          location.href = "main.html";
+        }
+
+        
+      if(getCookie("kakao")) {
+
+      }
+  }
+

@@ -1234,6 +1234,99 @@
             margin-left: 0;
         }
 
+
+        .btn-group .active {
+                width : 100%;
+                height : 65px;
+                border-radius: 7px;
+                background : #ddd;
+                border: none;
+                cursor: pointer;
+            }
+
+        .btn-group .focus {
+            width : 100%;
+            height : 65px;
+            border-radius: 7px;
+            background : #2AC1BC;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 450px;
+            height : 450px;
+            border-radius: 6px;
+
+        }
+
+        .modal-content .title {
+            width : 100%;
+            text-align: center;
+            line-height: 15px;
+            margin-top :20px;
+        }
+        
+        .modal-content .input-box {
+            margin : 15px;
+        }
+
+        .modal-content .input-box input {
+            padding : 24px 12px 12px 35px;
+        }
+
+        .modal-content .input-box:focus ~ .label,
+        .modal-content .input-box:valid ~ .label {
+            transform: translateX(-10px), translateY(-15px);
+        }
+
+        .modal-content .input-box:first-child {
+            margin-top : 50px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 버튼 스타일 */
+        
+        .changePassword {
+            position: relative;
+            left : 80px;
+            top : 20px;
+            width : 250px;
+            height : 50px;
+            padding: 10px 20px;
+            background-color: #2AC1BC;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
     /************footer**************/
         .moonbanggu-footer {
             margin-top: auto;
@@ -1521,12 +1614,12 @@
 
                                             <div class="my-info-header">
                                                 <h4 class="name">
-                                                    <b>김혜림님</b>의 회원정보
+                                                    <b id="title-name"></b>님의 회원정보
                                                 </h4>
 
                                                 <div class="btn">
-                                                    <button class="bt-text arr">비밀번호 변경</button>
-                                                    <button class="sc-khIimk gNMCgZ bt-text arr">회원탈퇴</button>
+                                                    <button class="bt-text arr" onclick = 'openModal()'>비밀번호 변경</button>
+                                                    <button class="sc-khIimk gNMCgZ bt-text arr" onclick="deleteMember()">회원탈퇴</button>
                                                 </div>
                                             </div>
 
@@ -1535,19 +1628,19 @@
                                                     <div class="member-info-box">
                                                         <dl>
                                                             <dt>아이디</dt>
-                                                            <dd>hyelim91</dd>
+                                                            <dd id = "id"></dd>
                                                         </dl>
                                                     </div>
                                                     <div class="member-info-box">
                                                         <dl>
                                                             <dt>이름</dt>
-                                                            <dd>김혜림</dd>
+                                                            <dd id="name"></dd>
                                                         </dl>
                                                     </div>
                                                     <div class="member-info-box">
                                                         <dl>
                                                             <dt>휴대폰 번호</dt>
-                                                            <dd>010-2866-4146</dd>
+                                                            <dd id="phone"></dd>
                                                         </dl>
                                                         <button class="bt-xsmall outlined">새로 인증하기</button>
                                                     </div>
@@ -1558,7 +1651,7 @@
                                                 <ul class="form-list large">
                                                     <li>
                                                         <div class="input-box active must">
-                                                            <input type="email" id="@email" name="email" required>
+                                                            <input type="email" id="@email" name="email" required onkeydown="enter(event)" oninput='buttonOn(event)'>
                                                             <span class="inform">이메일 (예: store@baemin.com)</span>
                                                             <label for="@email" class="label">이메일</label>
                                                         </div>
@@ -1585,7 +1678,7 @@
                                             </div>
                                         </section>
                                     </div>
-                                                        
+                        
                                 </div> <!-- monggu-container end -->
 
                                 <div class="moonbanggu-footer">
@@ -1634,7 +1727,37 @@
             </div>
         </div>
     
-</script>
+        
+                                    <!-- 비밀번호 변경 모달 -->
+                                    <div id="myModal" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close" onclick="closeModal()">&times;</span>
+                                            <h3 class="title">비밀번호 변경</h3>
+                                            <form>
+                                                <div class="input-box">
+                                                    <input type="password" id="now_password" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">현재 비밀번호</span>
+                                                </div>
+
+                                                <div class="input-box">
+                                                    <input type="password" id="new_password" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">새 비밀번호</span>
+                                                </div>
+
+                                                <div class="input-box">
+                                                    <input type="password" id="confirm_password" required="required">
+                                                    <span class="required"></span>
+                                                    <span class="label">새 비밀번호 확인</span>
+                                                </div>
+
+                                                <div class="submit">
+                                                    <button class="changePassword" type="button" onclick="changePw()">비밀번호 변경</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
 
             <!-- JAVASCRIPT -->
             <script src="main.js"></script>
@@ -1645,9 +1768,74 @@
             <script src="assets/libs/simplebar/simplebar.min.js"></script>
             <script src="assets/libs/feather-icons/feather.min.js"></script>
             
-<script>
+    <script>
+            let id = document.getElementById('id');
+            let name2 = document.getElementById('name');
+            let phone = document.getElementById('phone');
+            let email = document.getElementById('@email');
+            let birth = document.getElementById('@birthday');
+            let titleName = document.getElementById('title-name');
 
-</script>
+                if(getCookie('keepID')) {
+                    
+                    let cookies = getCookie('keepID');
+                    let name = document.querySelector('.khzwyP');
+                    name.innerText = cookies;
+                    titleName.innerText = cookies;
+
+                    Object.keys(localStorage).forEach(key => {
+                    if(key == "members"){
+                        let value = JSON.parse(localStorage.getItem(key));
+                        
+                        for(let i=0; i <value.length; i ++) {
+                            if(value[i].id == cookies){
+                                id.innerText = value[i].id;
+                                name2.innerText = value[i].userName;
+                                phone.innerText = value[i].phone;
+                                email.value = value[i].email;
+                                birth.value = value[i].birth;
+                            }
+                        }
+                    }
+                })
+
+                }
+                
+                if(getCookie('login')){
+                    let loginCookie = getCookie("login");
+                    let name = document.querySelector('.khzwyP');
+                    name.innerText = loginCookie;
+                    titleName.innerText = loginCookie;
+
+                    Object.keys(localStorage).forEach(key => {
+                    if(key == "members"){
+                        let value = JSON.parse(localStorage.getItem(key));
+                        
+                        for(let i=0; i <value.length; i ++) {
+                            if(value[i].userName == loginCookie){
+                                id.innerText = value[i].id;
+                                name2.innerText = value[i].userName;
+                                phone.innerText = value[i].phone;
+                                email.value = value[i].email;
+                                birth.value = value[i].birth;
+                            }
+                        }
+                    }
+                })
+
+                }
+                
+                function openModal() {
+                    var modal = document.getElementById("myModal");
+                    modal.style.display = "block";
+                }
+
+                function closeModal() {
+                    var modal = document.getElementById("myModal");
+                    modal.style.display = "none";
+                }
+                
+    </script>
     
 
     

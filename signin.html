@@ -1416,7 +1416,7 @@
                     });
 
                     localStorage.setItem("kakao",JSON.stringify(kakao));
-                    setCookie('login',profile.nickname,{secure: true, 'max-age': 1200});
+                    setCookie('kakao',profile.nickname,{secure: true, 'max-age': 1200});
                     alert("로그인 성공");
                     location.href = `/main2.html?name=${profile.nickname}`;
                 }else {  // 회원정보가 없으면
@@ -1428,7 +1428,7 @@
                     }]
                     // kakao 회원정보 따로 storage에 저장
                     localStorage.setItem("kakao",JSON.stringify(tem));
-                    setCookie('login',profile.nickname,{secure: true, 'max-age': 1200});
+                    setCookie('kakao',profile.nickname,{secure: true, 'max-age': 1200});
                     alert("로그인 성공");
                     location.href = `/main2.html?name=${profile.nickname}`;
                 }
